@@ -19,58 +19,9 @@ public class Player extends GameObject {
     }
 
     @Override
-    protected void create() {
-
-    }
-
-    @Override
-    public void preStep() {
-
-    }
-
-    @Override
-    public void step() {
-
-    }
-
-    @Override
     public void draw(Graphics g) {
 
         g.fillRect((int)x,(int)y,w,h);
     }
 
-    @Override
-    public void postDraw(Graphics graphics) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent keyEvent) {
-
-    }
-
-    @Override
-    public void keyTyped(KeyEvent keyEvent) {
-
-    }
 }
