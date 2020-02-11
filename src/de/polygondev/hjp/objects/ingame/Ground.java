@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 public class Ground extends GameObject {
     public Ground(Room room, int x, int y, int w, int h) {
+
         super(room);
 
         this.x = x;
@@ -34,6 +35,7 @@ public class Ground extends GameObject {
 
     @Override
     public void draw(Graphics g) {
+
         g.fillRect((int)x,(int)y,w,h);
     }
 

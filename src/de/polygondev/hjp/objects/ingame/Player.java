@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 public class Player extends GameObject {
     public Player(Room room, int x, int y) {
+
         super(room);
 
         this.x = x;
@@ -34,6 +35,7 @@ public class Player extends GameObject {
 
     @Override
     public void draw(Graphics g) {
+
         g.fillRect((int)x,(int)y,w,h);
     }
 

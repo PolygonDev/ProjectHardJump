@@ -18,6 +18,7 @@ public class RoomBuilder {
     }
 
     public RoomBuilder initFromFile(int id) {
+
         try {
             GameFile gf = new GameFile("rsc//game//rooms//room" + id + ".data");
             gf.loadToMemory();
@@ -26,6 +27,7 @@ public class RoomBuilder {
             String[] lines = fc.get();
 
             for (String line : lines) {
+
                 String[] sections = line.split(";");
 
                 if (sections[0].equalsIgnoreCase("player")) {
@@ -55,6 +57,7 @@ public class RoomBuilder {
     }
 
     public Room build() {
+
         return this.room;
     }
 }
