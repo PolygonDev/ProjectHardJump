@@ -4,6 +4,7 @@ import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
 import de.cg.cgge.io.MouseHelper;
 import de.polygondev.hjp.ctrl.Resources;
+import de.polygondev.hjp.ctrl.RoomBuilder;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -56,7 +57,7 @@ public class MainMenu extends GameObject {
         int titleX = (int) (room.getGameInstance().getWidth()/2-(titleBounds.getWidth()/2));
         int titleY = 200;
 
-        g.drawString(Resources.string_menu_main_title, titleX, 200);
+        g.drawString(Resources.string_menu_main_title, titleX, 150);
     }
 
     /**
@@ -122,11 +123,21 @@ public class MainMenu extends GameObject {
 
             if (inMouseRange()) {
                 switch (id) {
+
+                    //Start game
                     case 0:
+                        //Not the final implementation
+                        Room destination = new RoomBuilder(room.getGameInstance()).initFromFile(0).build();
+                        room.getGameInstance().getDrawer().changeRoomSafely(destination);
                         break;
+
+                    //Settings menu
                     case 1:
                         break;
+
+                    //Quit
                     case 2:
+                        System.exit(0);
                         break;
                 }
             }
