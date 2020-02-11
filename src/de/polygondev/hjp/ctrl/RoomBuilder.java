@@ -19,14 +19,19 @@ public class RoomBuilder {
     }
 
     public RoomBuilder initFromFile(int id) {
-
+        
+        //TODO: Das ist für den test gewesen
+        //id = 0;
+        
         //Check if it's a menu
         if (id == -1) {
 
             new MainMenu(room);
             return this;
         }
-
+        
+        
+        
         try {
             GameFile gf = new GameFile("rsc//game//rooms//room" + id + ".data");
             gf.loadToMemory();
