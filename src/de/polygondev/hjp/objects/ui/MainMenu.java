@@ -6,10 +6,11 @@ import de.cg.cgge.io.MouseHelper;
 import de.polygondev.hjp.ctrl.Resources;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class MainMenu extends GameObject {
 
-    int selectedButton = 0; //Useful for keyboard support and for later controller support; Also looks nicer
+    private int selectedButton = 0; //Useful for keyboard support and for later controller support; Also looks nicer
 
     public MainMenu(Room room) {
         super(room);
@@ -30,7 +31,7 @@ public class MainMenu extends GameObject {
                     break;
             }
 
-            new Button(room, 400+(100+20)*i, text, i, this);
+            new Button(room, 250 + (100 + 20) * i, text, i, this);
 
         }
     }
@@ -61,7 +62,7 @@ public class MainMenu extends GameObject {
     /**
      *          CLASS FOR THE BUTTON
      */
-    private class Button extends GameObject{
+    private static class Button extends GameObject{
 
         private int id;
 
@@ -75,8 +76,6 @@ public class MainMenu extends GameObject {
             super(room);
 
             this.y = y;
-            this.w = w;
-            this.h = h;
             this.text = text;
             this.owner = owner;
             this.id = id;
@@ -86,8 +85,8 @@ public class MainMenu extends GameObject {
 
         @Override
         public void draw(Graphics g) {
-            //To center the title
-            var bounds = g.getFontMetrics().getStringBounds(Resources.string_menu_main_title, g).getBounds();
+            //To center the button
+            var bounds = g.getFontMetrics().getStringBounds(text, g).getBounds();
             x = (int) (room.getGameInstance().getWidth()/2-(bounds.getWidth()/2));
             w = (int) bounds.getWidth();
             h = (int) bounds.getHeight();
@@ -95,24 +94,43 @@ public class MainMenu extends GameObject {
             if (owner.selectedButton == id) g.setColor(Resources.color_menu_main_buttons_highlighted);
             else                            g.setColor(Resources.color_menu_main_buttons_unhighlighted);
 
-            g.drawString(text, (int) x, (int) y);
+            //Raising the button on mouse hovering
+            int dy = (inMouseRange() ? (int)y-3 : (int)y);
+
+            g.drawString(text, (int) x, (int) (dy+bounds.getHeight()));
 
         }
 
         @Override
         public void step() {
+
             if (inMouseRange()) {
                 owner.selectedButton = id;
             }
         }
 
         private boolean inMouseRange() {
+
             int mx = mouseHelper.getMouseX();
             int my = mouseHelper.getMouseY();
 
             return (mx > x && mx < x+w && my > y && my < y+h);
         }
 
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+            if (inMouseRange()) {
+                switch (id) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                }
+            }
+        }
     }
 
 }
