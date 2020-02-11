@@ -16,6 +16,7 @@ public class Player extends GameObject {
     private Mover mover = new Mover(this);
     GravitySystem gs = new GravitySystem(this, 15f, mover);
     
+    
     public KeyManager keyManager = this.getRoom().getKeyManager();
     
     public Player(Room room, int x, int y) {
@@ -60,6 +61,7 @@ public class Player extends GameObject {
         
         gs.update();
         mover.update();
+        updatePhysics();
     }
 
 }
