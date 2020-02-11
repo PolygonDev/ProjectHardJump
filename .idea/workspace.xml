@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a34eb167-a643-478e-8144-01ab7180d504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +80,21 @@
       <option name="project" value="LOCAL" />
       <updated>1581437854566</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="gitignore">
+      <created>1581441187196</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1581441187196</updated>
+    </task>
+    <task id="LOCAL-00004" summary="gitignore">
+      <created>1581441214382</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1581441214382</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,24 +112,25 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Building core" />
-    <option name="LAST_COMMIT_MESSAGE" value="Building core" />
+    <MESSAGE value="gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="612" y="69" key="CommitChangelistDialog2" timestamp="1581441183792">
+    <state x="612" y="69" key="CommitChangelistDialog2" timestamp="1581441212947">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state x="612" y="69" key="CommitChangelistDialog2/0.40.1920.1040/-1920.40.1920.1040@0.40.1920.1040" timestamp="1581441183792" />
+    <state x="612" y="69" key="CommitChangelistDialog2/0.40.1920.1040/-1920.40.1920.1040@0.40.1920.1040" timestamp="1581441212947" />
     <state x="846" y="473" key="VCS.EditChangelistDialog" timestamp="1581441054272">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
     <state x="846" y="473" key="VCS.EditChangelistDialog/0.40.1920.1040/-1920.40.1920.1040@0.40.1920.1040" timestamp="1581441054272" />
-    <state x="552" y="290" key="Vcs.Push.Dialog.v2" timestamp="1581441192709">
+    <state x="552" y="290" key="Vcs.Push.Dialog.v2" timestamp="1581441217216">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state x="552" y="290" key="Vcs.Push.Dialog.v2/0.40.1920.1040/-1920.40.1920.1040@0.40.1920.1040" timestamp="1581441192709" />
-    <state x="636" y="385" key="com.intellij.ide.util.TipDialog" timestamp="1581440970651">
+    <state x="552" y="290" key="Vcs.Push.Dialog.v2/0.40.1920.1040/-1920.40.1920.1040@0.40.1920.1040" timestamp="1581441217216" />
+    <state x="636" y="385" key="com.intellij.ide.util.TipDialog" timestamp="1581441326817">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state x="636" y="385" key="com.intellij.ide.util.TipDialog/0.40.1920.1040/-1920.40.1920.1040@0.40.1920.1040" timestamp="1581440970651" />
+    <state x="636" y="385" key="com.intellij.ide.util.TipDialog/0.40.1920.1040/-1920.40.1920.1040@0.40.1920.1040" timestamp="1581441326817" />
   </component>
 </project>
