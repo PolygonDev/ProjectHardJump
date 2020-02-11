@@ -5,3 +5,5 @@ HardJumpProject.iml
 .gitignore
 *.iml
 *.xml
+out
+*.class
