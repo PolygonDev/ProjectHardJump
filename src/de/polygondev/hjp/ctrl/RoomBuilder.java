@@ -6,6 +6,7 @@ import de.cg.cgge.game.GameInstance;
 import de.cg.cgge.game.Room;
 import de.polygondev.hjp.objects.ingame.Ground;
 import de.polygondev.hjp.objects.ingame.Player;
+import de.polygondev.hjp.objects.ui.MainMenu;
 
 import java.io.IOException;
 
@@ -18,6 +19,13 @@ public class RoomBuilder {
     }
 
     public RoomBuilder initFromFile(int id) {
+
+        //Check if it's a menu
+        if (id == -1) {
+
+            new MainMenu(room);
+            return this;
+        }
 
         try {
             GameFile gf = new GameFile("rsc//game//rooms//room" + id + ".data");

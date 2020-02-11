@@ -20,7 +20,7 @@ public class GameController {
                 (int) game.getWidth(),
                 (int) game.getHeight());
         
-        Room testRoom = new RoomBuilder(game).initFromFile(0).build();
+        Room testRoom = new RoomBuilder(game).initFromFile(-1).build();
         game.getDrawer().changeRoomSafely(testRoom);
     }
 
