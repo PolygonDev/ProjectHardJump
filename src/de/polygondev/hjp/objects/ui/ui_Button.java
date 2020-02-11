@@ -69,6 +69,7 @@ public class ui_Button {
     
     public boolean isButtonClicked(MouseEvent e) {
         
+        //Hier kommt das mouse event vom main menü oder jedem anderen gameobject
         if (inMouseRange()) {
             return true;
         } else {
