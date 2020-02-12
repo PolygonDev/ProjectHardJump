@@ -33,15 +33,16 @@ public class Player extends GameObject {
 
         room.getCamera().setObjectToFollow(this);
         room.getCamera().setSpeed(10);
-        room.getCamera().setXpadding(400);
-        room.getCamera().setYpadding(300);
+        room.getCamera().setXpadding(700);
+        room.getCamera().setYpadding(100);
 
         gravity.setAcceleration(1.02f);
 
         addPhysics(mover);
         addPhysics(gravity);
     }
-
+    
+    @Override
     public void step() {
 
         //Going left
@@ -65,24 +66,25 @@ public class Player extends GameObject {
             if (mover.isOnGround() && !isJumping) {
                 mover.setYspeed(-30f);
                 isJumping = true;
+                room.getCamera().setYpadding(0);
             }
         }
 
         if (keyManager.checkKey(KeyEvent.VK_S)) {
             mover.setYspeed(mover.getYspeed()+0.5f);
         }
-
-        if (mover.isOnGround()) {
+    
+        if (this.collider.checkSolidBoxCollision(this.getX(), this.getY() + 1.0F, this.getWidth(), this.getHeight()) || this.mover.getYspeed() > 0.0F) {
             isJumping = false;
+            room.getCamera().setYpadding(100);
         }
-
+        
         updatePhysics();
     }
     
     @Override
     public void draw(Graphics g) {
         var cr = new CameraRenderer(g,room.getCamera());
-        cr.drawRect(1, 1, room.getGameInstance().getWidth(), room.getGameInstance().getHeight());
         
         g.setColor(Color.red);
         cr.fillRect((int)x,(int)y,w,h);

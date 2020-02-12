@@ -5,7 +5,7 @@ import de.cg.cgge.game.Room;
 
 import java.awt.*;
 
-public class UI_Label extends GameObject {
+public class UILabel extends GameObject {
     
     private String text;
     private GameObject owner;
@@ -22,12 +22,12 @@ public class UI_Label extends GameObject {
     
     private Font font;
     
-    public UI_Label(Room room, float x, float y, String text, LAYOUT flow, Font font, Color textcolor) {
+    public UILabel(Room room, float x, float y, String text, LAYOUT flow, Font font, Color textcolor) {
         super(room);
         initButton(room, x, y, text, flow, font, textcolor);
     }
     
-    public UI_Label(Room room, float x, float y, String text, LAYOUT flow, Color textcolor) {
+    public UILabel(Room room, float x, float y, String text, LAYOUT flow, Color textcolor) {
         super(room);
         initButton(room, x, y, text, flow, null, textcolor);
     }

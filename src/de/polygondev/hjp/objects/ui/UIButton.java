@@ -8,7 +8,7 @@ import de.cg.cgge.io.Sound;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class UI_Button extends GameObject{
+public class UIButton extends GameObject{
     
     private MouseHelper mouseHelper;
     
@@ -48,7 +48,7 @@ public class UI_Button extends GameObject{
      * @param textcolor sets the color of the button
      * @param textHighlightedColor sets the highlighted color of the button
      */
-    public UI_Button(Room room, float x, float y, String text, LAYOUT flow, Font font, Color textcolor, Color textHighlightedColor) {
+    public UIButton(Room room, float x, float y, String text, LAYOUT flow, Font font, Color textcolor, Color textHighlightedColor) {
         super(room);
         //super(room);
         initButton(room, x, y, text, flow, font, textcolor, textHighlightedColor);
@@ -64,7 +64,7 @@ public class UI_Button extends GameObject{
      * @param textcolor sets the color of the button
      * @param textHighlightedColor sets the highlighted color of the button
      */
-    public UI_Button(Room room, float x, float y, String text, LAYOUT flow, Color textcolor, Color textHighlightedColor) {
+    public UIButton(Room room, float x, float y, String text, LAYOUT flow, Color textcolor, Color textHighlightedColor) {
         super(room);
         //super(room);
         initButton(room, x, y, text, flow, null, textcolor, textHighlightedColor);
