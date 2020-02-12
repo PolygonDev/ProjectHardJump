@@ -4,8 +4,6 @@ import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 public class Ground extends GameObject {
     

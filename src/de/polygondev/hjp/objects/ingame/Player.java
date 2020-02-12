@@ -1,21 +1,20 @@
 package de.polygondev.hjp.objects.ingame;
 
+import de.cg.cgge.game.Camera;
 import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
 import de.cg.cgge.io.KeyManager;
-import de.cg.cgge.physics.Gravity;
 import de.cg.cgge.physics.Mover;
 import de.polygondev.hjp.utils.GravitySystem;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 public class Player extends GameObject {
     
     private Mover mover = new Mover(this);
     GravitySystem gs = new GravitySystem(this, 15f, mover);
-    
+    Camera cam = room.getCamera();
     
     public KeyManager keyManager = this.getRoom().getKeyManager();
     
@@ -23,6 +22,8 @@ public class Player extends GameObject {
         
         super(room);
         
+        cam.setObjectToFollow(this);
+        cam.setSpeed(5);
         
         this.x = x;
         this.y = y;
@@ -58,6 +59,10 @@ public class Player extends GameObject {
         
         g.setColor(Color.red);
         g.fillRect((int)x,(int)y,w,h);
+    
+
+        cam.update();
+        room.getCamera().update();
         
         gs.update();
         mover.update();

@@ -37,5 +37,21 @@ public class Resources {
 
         return null;
     }
+    
+    public static void setFcStrings(String fcStringsDir) {
+        //TODO
+    }
+    
+    public static FileContents getFcStrings() {
+        return fcStrings;
+    }
+    
+    public static FileContents getFcColors() {
+        return fcColors;
+    }
+    
+    public static FileContents getFcStyles() {
+        return fcStyles;
+    }
 
 }

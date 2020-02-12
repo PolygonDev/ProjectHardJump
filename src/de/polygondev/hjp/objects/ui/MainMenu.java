@@ -2,9 +2,9 @@ package de.polygondev.hjp.objects.ui;
 
 import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
-import de.cg.cgge.io.MouseHelper;
 import de.polygondev.hjp.ctrl.Resources;
 import de.polygondev.hjp.ctrl.RoomBuilder;
+import de.polygondev.hjp.enums.RoomType;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -13,13 +13,20 @@ public class MainMenu extends GameObject {
 
     private int selectedButton = 0; //Useful for keyboard support and for later controller support; Also looks nicer
     
-    private ui_Button but1;
-    private ui_Button but2;
-    private ui_Button but3;
+    private UI_Button but1;
+    private UI_Button but2;
+    private UI_Button but3;
     
+    /**
+     * Hier werden die ui elemente initialisiert
+     * @param room
+     */
     public MainMenu(Room room) {
         super(room);
-
+        
+        UI_Label title = new UI_Label(room, room.getGameInstance().getWidth()/2f, 150, Resources.string_menu_main_title, UI_Label.LAYOUT.CENTERED, Resources.font_menu_main_title
+                , Resources.color_menu_main_title);
+        
         //Creating the buttons
         for (int i = 0; i<3; i++) {
             String text = "";
@@ -27,47 +34,73 @@ public class MainMenu extends GameObject {
             switch (i) {
                 case 0:
                     text = Resources.string_menu_main_play;
-                    but1 = new ui_Button(room, 250 + (100 + 20) * i, 250, 200, 200, text, this);
+                    but1 = new UI_Button(room,
+                                         room.getGameInstance().getWidth()/2f,
+                                         260,
+                                         text,
+                                         UI_Button.LAYOUT.CENTERED,
+                                         Resources.font_menu_main_buttons,
+                                         Resources.color_menu_main_buttons_unhighlighted,
+                                         Resources.color_menu_main_buttons_highlighted);
                     break;
                 case 1:
                     text = Resources.string_menu_main_settings;
-                    but2 = new ui_Button(room, 250 + (100 + 20) * i, 350, 200, 200, text, this);
+                    but2 = new UI_Button(room,
+                                         room.getGameInstance().getWidth()/2f,
+                                         390,
+                                         text,
+                                         UI_Button.LAYOUT.CENTERED,
+                                         Resources.font_menu_main_buttons,
+                                         Resources.color_menu_main_buttons_unhighlighted,
+                                         Resources.color_menu_main_buttons_highlighted);
                     break;
                 case 2:
                     text = Resources.string_menu_main_quit;
-                    but3 = new ui_Button(room, 250 + (100 + 20) * i, 450, 200, 200, text, this);
+                    but3 = new UI_Button(room,
+                                         room.getGameInstance().getWidth()/2f,
+                                         510,
+                                         text,
+                                         UI_Button.LAYOUT.CENTERED,
+                                         Resources.font_menu_main_buttons,
+                                         Resources.color_menu_main_buttons_unhighlighted,
+                                         Resources.color_menu_main_buttons_highlighted);
                     break;
             }
-            
-            
-            //new ui_Button(room, 250 + (100 + 20) * i,text, i, this);
-
         }
+        
     }
     
+    /**
+     * hier werden buttonklicks registriert
+     * @param e
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         
         if (but1.isButtonClicked(e)) {
-            System.out.println("Play wurde gedrückt");
             
             //Not the final implementation
-            Room destination = new RoomBuilder(room.getGameInstance()).initFromFile(0).build();
+            Room destination = new RoomBuilder(room.getGameInstance()).initFromFile(RoomType.GAME).build();
             room.getGameInstance().getDrawer().changeRoomSafely(destination);
         }
         if (but2.isButtonClicked(e)) {
-            System.out.println("Optionen wurde gedrückt");
+            
+            but1.setFlow(UI_Button.LAYOUT.RIGHT);
+            but2.setFlow(UI_Button.LAYOUT.RIGHT);
+            but3.setFlow(UI_Button.LAYOUT.RIGHT);
         }
         if (but3.isButtonClicked(e)) {
-            System.out.println("Exit wurde gedrückt");
+    
+            Runtime.getRuntime().exit(0);
+            
         }
     }
     
-    public void ui_buttonEvent(MouseEvent e) {
-        System.out.println("Hier passiert ja etwas wuuhuu");
-    }
-    
+    /**
+     * hier wird alles gezeichnet. Wobei jedes ui element seinen eigenen zeichner hat
+     * @param g
+     */
     @Override
     public void draw(Graphics g) {
 
@@ -76,25 +109,6 @@ public class MainMenu extends GameObject {
          */
         g.setColor(Resources.color_menu_main_background);
         g.fillRect(0,0,room.getGameInstance().getWidth(), room.getGameInstance().getHeight());
-
-        /*
-            TITLE
-         */
-        g.setColor(Resources.color_menu_main_title);
-        g.setFont(Resources.font_menu_main_title);
-
-        //To center the title
-        var titleBounds = g.getFontMetrics().getStringBounds(Resources.string_menu_main_title, g).getBounds();
-        int titleX = (int) (room.getGameInstance().getWidth()/2-(titleBounds.getWidth()/2));
-        int titleY = 200;
-    
-        g.drawString(Resources.string_menu_main_title, titleX, 150);
-        
-        but1.buttonDraw(g);
-        but2.buttonDraw(g);
-        but3.buttonDraw(g);
-
-        
     }
 
 }
