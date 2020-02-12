@@ -33,7 +33,7 @@ public class RoomBuilder {
         
         
         try {
-            GameFile gf = new GameFile("rsc//game//rooms//" + roomType.name().toLowerCase() + ".data");
+            GameFile gf = new GameFile("res//game//rooms//" + roomType.name().toLowerCase() + ".data");
             gf.loadToMemory();
             FileContents fc = gf.getContents();
             

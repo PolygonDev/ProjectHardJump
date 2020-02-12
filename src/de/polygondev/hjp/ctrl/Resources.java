@@ -8,9 +8,9 @@ import java.io.IOException;
 
 public class Resources {
 
-    private static FileContents fcStrings = getContents("rsc//game//strings//en.data");
-    private static FileContents fcColors = getContents("rsc//game//colors.data");
-    private static FileContents fcStyles = getContents("rsc//game//styles.data");
+    private static FileContents fcStrings = getContents("res//game//strings//en.data");
+    private static FileContents fcColors = getContents("res//game//colors.data");
+    private static FileContents fcStyles = getContents("res//game//styles.data");
 
     public static final String string_menu_main_play = fcStrings.getFromKeyword("menu_main_play");
     public static final String string_menu_main_settings = fcStrings.getFromKeyword("menu_main_settings");
