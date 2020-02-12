@@ -4,7 +4,6 @@ import de.cg.cgge.game.Camera;
 import de.cg.cgge.game.CameraRenderer;
 import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
-import de.cg.cgge.gui.Drawer;
 import de.cg.cgge.io.KeyManager;
 import de.cg.cgge.physics.Collider;
 import de.cg.cgge.physics.Mover;

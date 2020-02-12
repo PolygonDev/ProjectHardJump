@@ -4,9 +4,6 @@ import de.cg.cgge.game.GameObject;
 import de.cg.cgge.physics.Collider;
 import de.cg.cgge.physics.Mover;
 import de.cg.cgge.physics.Physics;
-import de.polygondev.hjp.objects.ingame.Player;
-
-import java.awt.event.KeyEvent;
 
 public class GravitySystem extends Physics {
     
@@ -47,7 +44,8 @@ public class GravitySystem extends Physics {
     
     @Override
     public void update() {
-        
+    
+        //isActive = true;
         if (isActive) {
     
             mover.setYspeed(mover.getYacceleration() + force);
