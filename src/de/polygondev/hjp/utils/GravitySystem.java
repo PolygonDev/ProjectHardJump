@@ -12,35 +12,49 @@ public class GravitySystem extends Physics {
     
     private float force = 1.0f;
     private float beginForce;
-    private float acceleration = 9.81f;
+    private float acceleration = 9.82f;
     
+    private boolean isActive = true;
     
     private Mover mover;
     private Collider collider;
-    Player obj = null;
+    GameObject obj = null;
     
-    public GravitySystem(Player obj, float force, Mover mover) {
-        
+    public boolean isActive() {
+        return isActive;
+    }
+    
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+    
+    public GravitySystem(GameObject obj, Collider collider, float force, Mover mover) {
         super(obj);
         
+        initGravitySystem(obj, collider,force, mover);
+    }
+    
+    public void initGravitySystem(GameObject obj, Collider collider, float force, Mover mover) {
         this.obj = obj;
-        
         this.force = force;
         this.beginForce = force;
         
+        this.collider = collider;
+        
         this.mover = mover;
         mover.setYacceleration(1.0f);
-        
-        this.collider = new Collider(obj.getRoom(), obj);
     }
     
     @Override
     public void update() {
+        
+        if (isActive) {
     
-        if (!obj.keyManager.checkKey(KeyEvent.VK_SPACE)) {
-            
             mover.setYspeed(mover.getYacceleration() + force);
-            force *= acceleration;
+            force += acceleration;
+            
+        } else {
+            force = beginForce;
         }
         
         if (collider.checkSolidBoxCollision(obj.getX(), obj.getY() +1, obj.getWidth(), obj.getHeight()) || mover.getYspeed() > 0) {
