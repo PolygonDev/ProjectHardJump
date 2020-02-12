@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Resources {
 
-    private static FileContents fcStrings = getContents("res//game//strings//en.data");
+    private static FileContents fcStrings = getContents("res//game//lang//en.data");
     private static FileContents fcColors = getContents("res//game//colors.data");
     private static FileContents fcStyles = getContents("res//game//styles.data");
 
