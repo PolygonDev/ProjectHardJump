@@ -13,9 +13,9 @@ public class MainMenu extends GameObject {
 
     private int selectedButton = 0; //Useful for keyboard support and for later controller support; Also looks nicer
     
-    private UI_Button but1;
-    private UI_Button but2;
-    private UI_Button but3;
+    private UIButton but1;
+    private UIButton but2;
+    private UIButton but3;
     
     /**
      * Hier werden die ui elemente initialisiert
@@ -24,7 +24,7 @@ public class MainMenu extends GameObject {
     public MainMenu(Room room) {
         super(room);
         
-        UI_Label title = new UI_Label(room, room.getGameInstance().getWidth()/2f, 150, Resources.string_menu_main_title, UI_Label.LAYOUT.CENTERED, Resources.font_menu_main_title
+        UILabel title = new UILabel(room, room.getGameInstance().getWidth() / 2f, 150, Resources.string_menu_main_title, UILabel.LAYOUT.CENTERED, Resources.font_menu_main_title
                 , Resources.color_menu_main_title);
         
         //Creating the buttons
@@ -34,36 +34,36 @@ public class MainMenu extends GameObject {
             switch (i) {
                 case 0:
                     text = Resources.string_menu_main_play;
-                    but1 = new UI_Button(room,
+                    but1 = new UIButton(room,
                                          room.getGameInstance().getWidth()/2f,
-                                         260,
-                                         text,
-                                         UI_Button.LAYOUT.CENTERED,
-                                         Resources.font_menu_main_buttons,
-                                         Resources.color_menu_main_buttons_unhighlighted,
-                                         Resources.color_menu_main_buttons_highlighted);
+                                        260,
+                                        text,
+                                        UIButton.LAYOUT.CENTERED,
+                                        Resources.font_menu_main_buttons,
+                                        Resources.color_menu_main_buttons_unhighlighted,
+                                        Resources.color_menu_main_buttons_highlighted);
                     break;
                 case 1:
                     text = Resources.string_menu_main_settings;
-                    but2 = new UI_Button(room,
+                    but2 = new UIButton(room,
                                          room.getGameInstance().getWidth()/2f,
-                                         390,
-                                         text,
-                                         UI_Button.LAYOUT.CENTERED,
-                                         Resources.font_menu_main_buttons,
-                                         Resources.color_menu_main_buttons_unhighlighted,
-                                         Resources.color_menu_main_buttons_highlighted);
+                                        390,
+                                        text,
+                                        UIButton.LAYOUT.CENTERED,
+                                        Resources.font_menu_main_buttons,
+                                        Resources.color_menu_main_buttons_unhighlighted,
+                                        Resources.color_menu_main_buttons_highlighted);
                     break;
                 case 2:
                     text = Resources.string_menu_main_quit;
-                    but3 = new UI_Button(room,
+                    but3 = new UIButton(room,
                                          room.getGameInstance().getWidth()/2f,
-                                         510,
-                                         text,
-                                         UI_Button.LAYOUT.CENTERED,
-                                         Resources.font_menu_main_buttons,
-                                         Resources.color_menu_main_buttons_unhighlighted,
-                                         Resources.color_menu_main_buttons_highlighted);
+                                        510,
+                                        text,
+                                        UIButton.LAYOUT.CENTERED,
+                                        Resources.font_menu_main_buttons,
+                                        Resources.color_menu_main_buttons_unhighlighted,
+                                        Resources.color_menu_main_buttons_highlighted);
                     break;
             }
         }
@@ -86,9 +86,9 @@ public class MainMenu extends GameObject {
         }
         if (but2.isButtonClicked(e)) {
             
-            but1.setFlow(UI_Button.LAYOUT.RIGHT);
-            but2.setFlow(UI_Button.LAYOUT.RIGHT);
-            but3.setFlow(UI_Button.LAYOUT.RIGHT);
+            but1.setFlow(UIButton.LAYOUT.RIGHT);
+            but2.setFlow(UIButton.LAYOUT.RIGHT);
+            but3.setFlow(UIButton.LAYOUT.RIGHT);
         }
         if (but3.isButtonClicked(e)) {
     

@@ -8,7 +8,7 @@ import de.polygondev.hjp.enums.RoomType;
 import de.polygondev.hjp.objects.ingame.Ground;
 import de.polygondev.hjp.objects.ingame.Player;
 import de.polygondev.hjp.objects.ui.MainMenu;
-import de.polygondev.hjp.objects.ui.UI_Label;
+import de.polygondev.hjp.objects.ui.UILabel;
 
 import java.awt.*;
 import java.io.IOException;
@@ -60,11 +60,11 @@ public class RoomBuilder {
                 else if (sections[0].equalsIgnoreCase("ui_label")) {
                     int x = Integer.parseInt(sections[1]);
                     int y = Integer.parseInt(sections[2]);
-                    String           text = Resources.getFcStrings().getFromKeyword(sections[3]);
-                    UI_Label.LAYOUT flow                 = UI_Label.LAYOUT.valueOf(sections[4]);
-                    Color            textcolor            = Color.decode(Resources.getFcColors().getFromKeyword(sections[5]));
+                    String         text      = Resources.getFcStrings().getFromKeyword(sections[3]);
+                    UILabel.LAYOUT flow      = UILabel.LAYOUT.valueOf(sections[4]);
+                    Color          textcolor = Color.decode(Resources.getFcColors().getFromKeyword(sections[5]));
                     
-                    new UI_Label(room, x, y, text, flow,textcolor);
+                    new UILabel(room, x, y, text, flow, textcolor);
                 }
 
             }
