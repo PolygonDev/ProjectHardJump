@@ -17,7 +17,7 @@ public class GameCamera extends Camera {
         this.room = room;
 
         this.setXpadding(300);
-        this.setYpadding(100);
+        this.setYpadding(0);
         this.setSpeed(speed);
     }
 
@@ -35,31 +35,34 @@ public class GameCamera extends Camera {
 
         if (objX-xpos < xpadding || objX-xpos > room.getGameInstance().getWidth()-xpadding) {
             followOnX = true;
-            targetX = (int) objX + room.getGameInstance().getWidth()/2;
+            targetX = (int) objX - room.getGameInstance().getWidth()/2;
+
         }
 
-        if (objY-ypos < ypadding || objY-ypos > room.getGameInstance().getHeight()-ypadding) {
+        if (objY-ypos < ypadding-300 || objY-ypos > room.getGameInstance().getHeight()-ypadding) {
             followOnY = true;
-            targetY = (int) objY;
+            targetY = (int) objY - room.getGameInstance().getHeight()/2;
         }
 
         if (followOnX) {
-            if (Math.abs(getX()-(targetX)) > camSpeed) {
-                int dir = ((targetX - xpos >= 0) ? -1 : 1);
-
-                xpos += camSpeed*dir;
+            if (xpos-targetX < 0) {
+                xpos+=camSpeed;
             } else {
+                xpos-=camSpeed;
+            }
+            if (xpos > targetX-camSpeed && xpos < targetX+camSpeed) {
                 followOnX = false;
             }
         }
 
         if (followOnY) {
-            if (Math.abs(ypos-targetY+room.getGameInstance().getHeight()/2) > camSpeed*2) {
-                followOnY = false;
+            if (ypos-targetY < 0) {
+                ypos+=camSpeed;
             } else {
-                int dir = ((targetY - ypos >= 0) ? -1 : 1);
-
-                setY(ypos+camSpeed*dir);
+                ypos-=camSpeed;
+            }
+            if (ypos > targetY-camSpeed && ypos < targetY+camSpeed) {
+                followOnY = false;
             }
         }
 
