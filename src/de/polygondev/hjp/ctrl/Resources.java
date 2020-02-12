@@ -2,6 +2,7 @@ package de.polygondev.hjp.ctrl;
 
 import de.cg.cgge.files.FileContents;
 import de.cg.cgge.files.GameFile;
+import de.cg.cgge.gui.AnimatedSprite;
 
 import java.awt.*;
 import java.io.IOException;
@@ -24,6 +25,12 @@ public class Resources {
 
     public static final Font font_menu_main_buttons = new Font(fcStyles.getFromKeyword("font_menu_main_buttons_name"), Font.PLAIN, Integer.parseInt(fcStyles.getFromKeyword("font_menu_main_buttons_size")));
     public static final Font font_menu_main_title = new Font(fcStyles.getFromKeyword("font_menu_main_title_name"), Font.PLAIN, Integer.parseInt(fcStyles.getFromKeyword("font_menu_main_title_size")));
+
+    public static final AnimatedSprite as_player = new AnimatedSprite(64, 64, 0,
+             "res//game//sprites//player//idle.png",
+                    "res//game//sprites//player//walk1.png",
+                    "res//game//sprites//player//walk2.png");
+
 
     private static FileContents getContents(String path) {
 

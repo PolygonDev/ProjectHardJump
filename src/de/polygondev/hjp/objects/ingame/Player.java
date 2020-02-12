@@ -7,6 +7,7 @@ import de.cg.cgge.io.KeyManager;
 import de.cg.cgge.physics.Collider;
 import de.cg.cgge.physics.Gravity;
 import de.cg.cgge.physics.Mover;
+import de.polygondev.hjp.animations.PlayerAnimationController;
 import de.polygondev.hjp.ctrl.GameCamera;
 
 
@@ -22,6 +23,8 @@ public class Player extends GameObject {
     private Gravity gravity = new Gravity(this, 1.0f, mover);
     
     private KeyManager keyManager = this.getRoom().getKeyManager();
+
+    private PlayerAnimationController pac;
     
     public Player(Room room, int x, int y) {
         
@@ -30,12 +33,14 @@ public class Player extends GameObject {
         this.x = x;
         this.y = y;
         this.w = 64;
-        this.h = 128;
+        this.h = 64;
 
         GameCamera gameCamera = new GameCamera(this, room, 10);
         room.setCamera(gameCamera);
 
         gravity.setAcceleration(1.02f);
+
+        pac = new PlayerAnimationController();
 
         addPhysics(mover);
         addPhysics(gravity);
@@ -43,7 +48,9 @@ public class Player extends GameObject {
     
     @Override
     public void step() {
-        
+
+        pac.setAnimationType(PlayerAnimationController.AnimationType.IDLE);
+
         //Jumping
         if (keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W)) {
             if (mover.isOnGround() && !isJumping) {
@@ -60,6 +67,8 @@ public class Player extends GameObject {
         
         //Going left
         if (keyManager.checkKey(KeyEvent.VK_A)) {
+            pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
+            pac.setDir(1);
             if (keyManager.checkKey(KeyEvent.VK_SHIFT)) {
                 mover.setXspeed(-20f);
             } else {
@@ -68,22 +77,24 @@ public class Player extends GameObject {
         }
         //Going right
         if (keyManager.checkKey(KeyEvent.VK_D)) {
+            pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
+            pac.setDir(0);
             if (keyManager.checkKey(KeyEvent.VK_SHIFT)) {
                 mover.setXspeed(20f);
             } else {
                 mover.setXspeed(10f);
             }
         }
-        
+
+        pac.update();
         updatePhysics();
     }
     
     @Override
     public void draw(Graphics g) {
         var cr = new CameraRenderer(g,room.getCamera());
-        
-        g.setColor(Color.red);
-        cr.fillRect((int)x,(int)y,w,h);
+
+        pac.draw((int)x,(int)y,cr, g);
     }
 
 }

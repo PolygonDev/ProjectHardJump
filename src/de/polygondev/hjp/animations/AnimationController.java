@@ -10,7 +10,11 @@ public class AnimationController {
 
     }
 
-    public void draw(int x, int y, CameraRenderer cr) {
+    public void draw(int x, int y, CameraRenderer cr, Graphics g) {
+
+    }
+
+    public void update() {
 
     }
 
