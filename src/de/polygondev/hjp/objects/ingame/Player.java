@@ -32,7 +32,7 @@ public class Player extends GameObject {
         this.h = 128;
 
         room.getCamera().setObjectToFollow(this);
-        room.getCamera().setSpeed(10);
+        room.getCamera().setSpeed(21);
         room.getCamera().setXpadding(700);
         room.getCamera().setYpadding(100);
 
@@ -44,7 +44,21 @@ public class Player extends GameObject {
     
     @Override
     public void step() {
-
+        
+        //Jumping
+        if (keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W)) {
+            if (mover.isOnGround() && !isJumping) {
+                mover.setYspeed(-30f);
+                isJumping = true;
+                room.getCamera().setYpadding(0);
+            }
+        }
+    
+        if (this.collider.checkSolidBoxCollision(this.getX(), this.getY() + 1.0F, this.getWidth(), this.getHeight()) || this.mover.getYspeed() > 0.0F) {
+            isJumping = false;
+            room.getCamera().setYpadding(200);
+        }
+        
         //Going left
         if (keyManager.checkKey(KeyEvent.VK_A)) {
             if (keyManager.checkKey(KeyEvent.VK_SHIFT)) {
@@ -60,23 +74,6 @@ public class Player extends GameObject {
             } else {
                 mover.setXspeed(10f);
             }
-        }
-        //Jumping
-        if (keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W)) {
-            if (mover.isOnGround() && !isJumping) {
-                mover.setYspeed(-30f);
-                isJumping = true;
-                room.getCamera().setYpadding(0);
-            }
-        }
-
-        if (keyManager.checkKey(KeyEvent.VK_S)) {
-            mover.setYspeed(mover.getYspeed()+0.5f);
-        }
-    
-        if (this.collider.checkSolidBoxCollision(this.getX(), this.getY() + 1.0F, this.getWidth(), this.getHeight()) || this.mover.getYspeed() > 0.0F) {
-            isJumping = false;
-            room.getCamera().setYpadding(100);
         }
         
         updatePhysics();

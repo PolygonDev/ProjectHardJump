@@ -75,7 +75,9 @@ public class UIButton extends GameObject{
         this.x = x;
         this.y = y;
         this.xback = x;
-    
+        
+        this.solid = false;
+        
         this.font = font;
         this.text = text;
         this.textcolor = textcolor;

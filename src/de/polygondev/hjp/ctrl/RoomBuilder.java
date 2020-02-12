@@ -8,6 +8,7 @@ import de.polygondev.hjp.enums.RoomType;
 import de.polygondev.hjp.objects.ingame.Ground;
 import de.polygondev.hjp.objects.ingame.Player;
 import de.polygondev.hjp.objects.ui.MainMenu;
+import de.polygondev.hjp.objects.ui.UIButton;
 import de.polygondev.hjp.objects.ui.UILabel;
 
 import java.awt.*;
@@ -44,12 +45,14 @@ public class RoomBuilder {
                 String[] sections = line.split(";");
                 
                 if (sections[0].equalsIgnoreCase("player")) {
+                    
                     int x = Integer.parseInt(sections[1]);
                     int y = Integer.parseInt(sections[2]);
                     
                     new Player(room, x, y);
                 }
                 else if (sections[0].equalsIgnoreCase("ground")) {
+                    
                     int x = Integer.parseInt(sections[1]);
                     int y = Integer.parseInt(sections[2]);
                     int w = Integer.parseInt(sections[3]);
@@ -57,7 +60,8 @@ public class RoomBuilder {
                     
                     new Ground(room, x, y, w, h);
                 }
-                else if (sections[0].equalsIgnoreCase("ui_label")) {
+                else if (sections[0].equalsIgnoreCase("uilabel")) {
+                    
                     int x = Integer.parseInt(sections[1]);
                     int y = Integer.parseInt(sections[2]);
                     String         text      = Resources.getFcStrings().getFromKeyword(sections[3]);
@@ -65,6 +69,17 @@ public class RoomBuilder {
                     Color          textcolor = Color.decode(Resources.getFcColors().getFromKeyword(sections[5]));
                     
                     new UILabel(room, x, y, text, flow, textcolor);
+                }
+                else if (sections[0].equalsIgnoreCase(("uibutton"))) {
+                    
+                    int x = Integer.parseInt(sections[1]);
+                    int y = Integer.parseInt(sections[2]);
+                    String text = Resources.getFcStrings().getFromKeyword(sections[3]);
+                    UIButton.LAYOUT flow      = UIButton.LAYOUT.valueOf(sections[4]);
+                    Color          textcolor = Color.decode(Resources.getFcColors().getFromKeyword(sections[5]));
+                    Color          tchighi = Color.decode(Resources.getFcColors().getFromKeyword(sections[6]));
+                    
+                    new UIButton(room, x, y, text, flow, textcolor, tchighi);
                 }
 
             }
