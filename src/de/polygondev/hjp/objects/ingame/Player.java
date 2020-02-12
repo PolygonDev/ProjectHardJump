@@ -41,7 +41,8 @@ public class Player extends GameObject {
         addPhysics(mover);
         addPhysics(gravity);
     }
-
+    
+    @Override
     public void step() {
 
         //Going left
@@ -71,18 +72,17 @@ public class Player extends GameObject {
         if (keyManager.checkKey(KeyEvent.VK_S)) {
             mover.setYspeed(mover.getYspeed()+0.5f);
         }
-
-        if (mover.isOnGround()) {
+    
+        if (this.collider.checkSolidBoxCollision(this.getX(), this.getY() + 1.0F, this.getWidth(), this.getHeight()) || this.mover.getYspeed() > 0.0F) {
             isJumping = false;
         }
-
+        
         updatePhysics();
     }
     
     @Override
     public void draw(Graphics g) {
         var cr = new CameraRenderer(g,room.getCamera());
-        cr.drawRect(1, 1, room.getGameInstance().getWidth(), room.getGameInstance().getHeight());
         
         g.setColor(Color.red);
         cr.fillRect((int)x,(int)y,w,h);

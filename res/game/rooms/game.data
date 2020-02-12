@@ -1,3 +1,3 @@
 player;50;50
-ground;0;500;10000;80
+ground;0;500;10000;20
 ui_label;40;40;menu_main_title;RIGHT;menu_main_title
