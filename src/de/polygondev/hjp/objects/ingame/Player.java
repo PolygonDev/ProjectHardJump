@@ -33,7 +33,7 @@ public class Player extends GameObject {
 
         room.getCamera().setObjectToFollow(this);
         room.getCamera().setSpeed(10);
-        room.getCamera().setXpadding(200);
+        room.getCamera().setXpadding(700);
         room.getCamera().setYpadding(100);
 
         gravity.setAcceleration(1.02f);
