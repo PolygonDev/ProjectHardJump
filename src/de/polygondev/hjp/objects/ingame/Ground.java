@@ -1,5 +1,6 @@
 package de.polygondev.hjp.objects.ingame;
 
+import de.cg.cgge.game.CameraRenderer;
 import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
 
@@ -20,9 +21,12 @@ public class Ground extends GameObject {
 
     @Override
     public void draw(Graphics g) {
+
+        CameraRenderer cr = new CameraRenderer(g, room.getCamera());
         
-        g.setColor(Color.green);
-        g.fillRect((int)x,(int)y,w,h);
+        g.setColor(Color.GREEN);
+        cr.fillRect((int)x,(int)y,w,h);
+
     }
 
 }
