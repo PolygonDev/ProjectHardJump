@@ -33,8 +33,8 @@ public class Player extends GameObject {
 
         room.getCamera().setObjectToFollow(this);
         room.getCamera().setSpeed(10);
-        room.getCamera().setXpadding(400);
-        room.getCamera().setYpadding(300);
+        room.getCamera().setXpadding(200);
+        room.getCamera().setYpadding(100);
 
         gravity.setAcceleration(1.02f);
 
@@ -66,6 +66,7 @@ public class Player extends GameObject {
             if (mover.isOnGround() && !isJumping) {
                 mover.setYspeed(-30f);
                 isJumping = true;
+                room.getCamera().setYpadding(0);
             }
         }
 
@@ -75,6 +76,7 @@ public class Player extends GameObject {
     
         if (this.collider.checkSolidBoxCollision(this.getX(), this.getY() + 1.0F, this.getWidth(), this.getHeight()) || this.mover.getYspeed() > 0.0F) {
             isJumping = false;
+            room.getCamera().setYpadding(100);
         }
         
         updatePhysics();
