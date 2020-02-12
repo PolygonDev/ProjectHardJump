@@ -7,6 +7,7 @@ import de.cg.cgge.io.KeyManager;
 import de.cg.cgge.physics.Collider;
 import de.cg.cgge.physics.Gravity;
 import de.cg.cgge.physics.Mover;
+import de.polygondev.hjp.ctrl.GameCamera;
 
 
 import java.awt.*;
@@ -31,10 +32,8 @@ public class Player extends GameObject {
         this.w = 64;
         this.h = 128;
 
-        room.getCamera().setObjectToFollow(this);
-        room.getCamera().setSpeed(21);
-        room.getCamera().setXpadding(700);
-        room.getCamera().setYpadding(100);
+        GameCamera gameCamera = new GameCamera(this, room, 10);
+        room.setCamera(gameCamera);
 
         gravity.setAcceleration(1.02f);
 
