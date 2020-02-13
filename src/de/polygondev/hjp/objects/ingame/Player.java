@@ -35,7 +35,7 @@ public class Player extends GameObject {
         this.w = 64;
         this.h = 64;
 
-        GameCamera gameCamera = new GameCamera(this, room, 10);
+        GameCamera gameCamera = new GameCamera(this, room, 7);
         room.setCamera(gameCamera);
 
         gravity.setAcceleration(1.01f);
@@ -45,7 +45,9 @@ public class Player extends GameObject {
         addPhysics(mover);
         addPhysics(gravity);
     }
-    
+
+    private int movementAccelerator = 0;
+
     @Override
     public void step() {
 
@@ -75,21 +77,17 @@ public class Player extends GameObject {
         if (keyManager.checkKey(KeyEvent.VK_A)) {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(1);
-            if (keyManager.checkKey(KeyEvent.VK_SHIFT)) {
-                mover.setXspeed(-20f);
-            } else {
-                mover.setXspeed(-10f);
-            }
+
+            mover.setXspeed(-7f);
+
         }
         //Going right
         if (keyManager.checkKey(KeyEvent.VK_D)) {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(0);
-            if (keyManager.checkKey(KeyEvent.VK_SHIFT)) {
-                mover.setXspeed(20f);
-            } else {
-                mover.setXspeed(10f);
-            }
+
+            mover.setXspeed(7f);
+
         }
 
         pac.update();
