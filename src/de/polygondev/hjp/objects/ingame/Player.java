@@ -38,7 +38,7 @@ public class Player extends GameObject {
         GameCamera gameCamera = new GameCamera(this, room, 10);
         room.setCamera(gameCamera);
 
-        gravity.setAcceleration(1.02f);
+        gravity.setAcceleration(1.01f);
 
         pac = new PlayerAnimationController();
 
@@ -54,9 +54,15 @@ public class Player extends GameObject {
         //Jumping
         if (keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W)) {
             if (mover.isOnGround() && !isJumping) {
-                mover.setYspeed(-30f);
+                mover.setYspeed(-20f);
                 isJumping = true;
                 room.getCamera().setYpadding(0);
+            } else if (mover.getYspeed() < 0){
+                mover.setYspeed(mover.getYspeed()-0.5f);
+            }
+        } else if (!keyManager.checkKey(KeyEvent.VK_SPACE) && !keyManager.checkKey(KeyEvent.VK_W)) {
+            if (isJumping && mover.getYspeed() < 0) {
+                mover.setYspeed(5);
             }
         }
     
