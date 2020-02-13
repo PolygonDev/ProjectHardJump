@@ -88,7 +88,6 @@ public class MainMenu extends GameObject {
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         
-        System.out.println("Mouse Clicked " + but1.isMouseHover());
         if (but1.isMouseHover()) {
             
             //Not the final implementation
@@ -96,8 +95,6 @@ public class MainMenu extends GameObject {
             room.getGameInstance().getDrawer().changeRoomSafely(destination);
         }
         if (but2.isMouseHover()) {
-            
-            System.out.println(but1.getOriginLayout().name());
             
             but1.setOriginLayout(UILayout.RIGHT);
             but2.setOriginLayout(UILayout.RIGHT);
