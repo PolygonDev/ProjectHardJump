@@ -1,5 +1,6 @@
 player;50;50
-ground;0;500;10000;20
+ground;0;500;250;100
 ground;300;450;50;100
 uilabel;40;40;menu_main_title;RIGHT;menu_main_title
 uibutton;80;120;menu_main_title;RIGHT;menu_main_title;menu_main_title
+jetpack;350;380

@@ -5,6 +5,7 @@ import de.cg.cgge.files.GameFile;
 import de.cg.cgge.game.GameInstance;
 import de.cg.cgge.game.Room;
 import de.polygondev.hjp.enums.RoomType;
+import de.polygondev.hjp.objects.ingame.Collectable;
 import de.polygondev.hjp.objects.ingame.Ground;
 import de.polygondev.hjp.objects.ingame.Player;
 import de.polygondev.hjp.objects.ui.MainMenu;
@@ -80,6 +81,13 @@ public class RoomBuilder {
                     Color          tchighi = Color.decode(Resources.getFcColors().getFromKeyword(sections[6]));
                     
                     new UIButton(room, x, y, text, flow, textcolor, tchighi);
+                }
+                else if (sections[0].equalsIgnoreCase("jetpack")) {
+
+                    int x = Integer.parseInt(sections[1]);
+                    int y = Integer.parseInt(sections[2]);
+
+                    new Collectable(room, x, y, Collectable.CollectableType.POWERUP_JATPACK, Resources.sprite_jetpack);
                 }
 
             }

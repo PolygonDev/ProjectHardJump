@@ -101,4 +101,20 @@ public class Player extends GameObject {
         pac.draw((int)x,(int)y,cr, g);
     }
 
+    private void checkForCollectibles() {
+        for (GameObject obj : room.getObjectManager().getObjects()) {
+            if (obj instanceof Collectable) {
+                Collectable col = (Collectable) obj;
+                if (col.getType() == Collectable.CollectableType.POWERUP_JATPACK) {
+                    enableJetPack();
+                    col.destroy();
+                }
+            }
+        }
+    }
+
+    private void enableJetPack() {
+
+    }
+
 }

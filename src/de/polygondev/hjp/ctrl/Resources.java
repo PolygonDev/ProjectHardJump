@@ -3,6 +3,7 @@ package de.polygondev.hjp.ctrl;
 import de.cg.cgge.files.FileContents;
 import de.cg.cgge.files.GameFile;
 import de.cg.cgge.gui.AnimatedSprite;
+import de.cg.cgge.gui.Sprite;
 
 import java.awt.*;
 import java.io.IOException;
@@ -30,6 +31,8 @@ public class Resources {
              "res//game//sprites//player//idle.png",
                     "res//game//sprites//player//walk1.png",
                     "res//game//sprites//player//walk2.png");
+
+    public static final Sprite sprite_jetpack = new Sprite("res//game//sprites//collectables//jetpack.png", 64, 64, 0);
 
 
     private static FileContents getContents(String path) {
