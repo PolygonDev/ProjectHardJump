@@ -7,34 +7,15 @@ import de.cg.cgge.io.Sound;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Method;
 
-public class UIButton extends GameObject{
-    
-    private MouseHelper mouseHelper;
-    
+public class UIButton extends UIObject {
     
     private String text;
-    private GameObject owner;
-    
-    private float x = 0;
-    private float y = 0;
-    private float xback = 0;
-    
-    private float width = 0;
-    private float height = 0;
-    
-    private LAYOUT flow = LAYOUT.RIGHT;
-    private boolean isFlowSet = false;
     private Color textcolor;
     private Color textHighlightedColor;
     
     private Sound sound;
-    
-    /**
-     * sets the flow values to a enum string
-     */
-    public enum LAYOUT { RIGHT, CENTERED, LEFT }
-    
     private Font font;
     
     /**
@@ -48,10 +29,10 @@ public class UIButton extends GameObject{
      * @param textcolor sets the color of the button
      * @param textHighlightedColor sets the highlighted color of the button
      */
-    public UIButton(Room room, float x, float y, String text, LAYOUT flow, Font font, Color textcolor, Color textHighlightedColor) {
-        super(room);
-        //super(room);
-        initButton(room, x, y, text, flow, font, textcolor, textHighlightedColor);
+    public UIButton(Room room, float x, float y, String text, UILayout flow, Font font, Color textcolor, Color textHighlightedColor) {
+        super(room, x, y, 0, 0);
+        
+        initButton(room,text, flow, font, textcolor, textHighlightedColor);
     }
     
     /**
@@ -64,28 +45,20 @@ public class UIButton extends GameObject{
      * @param textcolor sets the color of the button
      * @param textHighlightedColor sets the highlighted color of the button
      */
-    public UIButton(Room room, float x, float y, String text, LAYOUT flow, Color textcolor, Color textHighlightedColor) {
-        super(room);
-        //super(room);
-        initButton(room, x, y, text, flow, null, textcolor, textHighlightedColor);
+    public UIButton(Room room, float x, float y, String text, UILayout flow, Color textcolor, Color textHighlightedColor) {
+        super(room, x, y, 0, 0);
+        
+        initButton(room,text,flow,null,textcolor,textHighlightedColor);
     }
     
-    private void initButton(Room room, float x, float y, String text, LAYOUT flow, Font font, Color textcolor, Color textHighlightedColor) {
-    
-        this.x = x;
-        this.y = y;
-        this.xback = x;
+    private void initButton(Room room, String text, UILayout flow, Font font, Color textcolor, Color textHighlightedColor) {
         
-        this.solid = false;
+        this.setOriginLayout(flow);
         
         this.font = font;
         this.text = text;
         this.textcolor = textcolor;
         this.textHighlightedColor = textHighlightedColor;
-        
-        this.flow = flow;
-    
-        this.mouseHelper = new MouseHelper(room.getGameInstance());
     }
     
     /**
@@ -102,61 +75,6 @@ public class UIButton extends GameObject{
      */
     public void setText(String text) {
         this.text = text;
-        this.isFlowSet = false;
-    }
-    
-    /**
-     * gets the x value of the button
-     * @return float x
-     */
-    @Override
-    public float getX() {
-        return x;
-    }
-    
-    /**
-     * sets the x value of the button (works in runtime)
-     * @param x float
-     */
-    @Override
-    public void setX(float x) {
-        this.x = x;
-        this.xback = x;
-    }
-    
-    /**
-     * gets the y value of the button
-     * @return float y
-     */
-    @Override
-    public float getY() {
-        return y;
-    }
-    
-    /**
-     * sets the y value of the button (works in runtime)
-     * @param y float
-     */
-    @Override
-    public void setY(float y) {
-        this.y = y;
-    }
-    
-    /**
-     * gets the layout of the button
-     * @return {@link LAYOUT}
-     */
-    public LAYOUT getFlow() {
-        return flow;
-    }
-    
-    /**
-     * sets the value of the button (works in runtime)
-     * @param flow {@link LAYOUT}
-     */
-    public void setFlow(LAYOUT flow) {
-        this.flow = flow;
-        this.isFlowSet = false;
     }
     
     /**
@@ -213,32 +131,17 @@ public class UIButton extends GameObject{
      */
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
+        
         g.setFont(font);
         
         //To center the button
         var bounds = g.getFontMetrics().getStringBounds(text, g).getBounds();
+    
+        setWidth((int) bounds.getWidth());
+        setHeight((int) bounds.getHeight());
         
-        width = (float) bounds.getWidth();
-        height = (float) bounds.getHeight();
-        
-        if (!isFlowSet) {
-            switch (flow) {
-                case RIGHT:
-                    x = xback;
-                    isFlowSet = true;
-                    break;
-                case CENTERED:
-                    x = xback - width / 2;
-                    isFlowSet = true;
-                    break;
-                case LEFT:
-                    x = xback - width;
-                    isFlowSet = true;
-                    break;
-            }
-        }
-        
-        if (inMouseRange()) {
+        if (isMouseHover()) {
             
             g.setColor(textHighlightedColor);
             
@@ -249,33 +152,10 @@ public class UIButton extends GameObject{
         }
         
         //Raising the button on mouse hovering
-        int dy = (inMouseRange() ? (int) y - 3 : (int) y);
+        int dy = (isMouseHover() ? (int) y - 3 : (int) y);
         
         g.drawString(text, (int) x, (int) (dy + bounds.getHeight()));
         g.setFont(null);
-    }
-    
-    private boolean inMouseRange() {
-        
-        int mx = mouseHelper.getMouseX();
-        int my = mouseHelper.getMouseY();
-        
-        return (mx > x && mx < x + width && my > y && my < y + height);
-    }
-    
-    /**
-     * tests if the button is clicked and returns a boolean if it is
-     * @param e {@link MouseEvent}
-     * @return {@link Boolean}
-     */
-    public boolean isButtonClicked(MouseEvent e) {
-        
-        //Hier kommt das mouse event vom main menü oder jedem anderen gameobject
-        if (inMouseRange()) {
-            return true;
-        } else {
-            return false;
-        }
     }
     
 }

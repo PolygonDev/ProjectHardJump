@@ -8,6 +8,7 @@ import de.polygondev.hjp.enums.RoomType;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.Iterator;
 
 public class MainMenu extends GameObject {
 
@@ -24,50 +25,59 @@ public class MainMenu extends GameObject {
     public MainMenu(Room room) {
         super(room);
         
-        UILabel title = new UILabel(room, room.getGameInstance().getWidth() / 2f, 150, Resources.string_menu_main_title, UILabel.LAYOUT.CENTERED, Resources.font_menu_main_title
-                , Resources.color_menu_main_title);
+        UILabel title = new UILabel(room, UILayout.CENTERED, room.getGameInstance().getWidth() / 2f, 150, Resources.string_menu_main_title,
+                                    Resources.font_menu_main_title, Resources.color_menu_main_title);
+        
+        try {
+            for (Iterator<GameObject> it = room.getObjectManager().getObjects().iterator(); it.hasNext(); ){
+                System.out.println("ele1 " + it.next());
+            }
+        } catch (Exception ignored) {}
         
         //Creating the buttons
         for (int i = 0; i<3; i++) {
             String text = "";
             //Gathering the text of the buttons
-            switch (i) {
-                case 0:
-                    text = Resources.string_menu_main_play;
-                    but1 = new UIButton(room,
-                                         room.getGameInstance().getWidth()/2f,
-                                        260,
-                                        text,
-                                        UIButton.LAYOUT.CENTERED,
-                                        Resources.font_menu_main_buttons,
-                                        Resources.color_menu_main_buttons_unhighlighted,
-                                        Resources.color_menu_main_buttons_highlighted);
-                    break;
-                case 1:
-                    text = Resources.string_menu_main_settings;
-                    but2 = new UIButton(room,
-                                         room.getGameInstance().getWidth()/2f,
-                                        390,
-                                        text,
-                                        UIButton.LAYOUT.CENTERED,
-                                        Resources.font_menu_main_buttons,
-                                        Resources.color_menu_main_buttons_unhighlighted,
-                                        Resources.color_menu_main_buttons_highlighted);
-                    break;
-                case 2:
-                    text = Resources.string_menu_main_quit;
-                    but3 = new UIButton(room,
-                                         room.getGameInstance().getWidth()/2f,
-                                        510,
-                                        text,
-                                        UIButton.LAYOUT.CENTERED,
-                                        Resources.font_menu_main_buttons,
-                                        Resources.color_menu_main_buttons_unhighlighted,
-                                        Resources.color_menu_main_buttons_highlighted);
-                    break;
+    
+            try {
+                switch (i) {
+                    case 0:
+                        text = Resources.string_menu_main_play;
+                        but1 = new UIButton(room,
+                                            room.getGameInstance().getWidth() / 2f,
+                                            260,
+                                            text,
+                                            UILayout.CENTERED,
+                                            Resources.font_menu_main_buttons,
+                                            Resources.color_menu_main_buttons_unhighlighted,
+                                            Resources.color_menu_main_buttons_highlighted);
+                        break;
+                    case 1:
+                        text = Resources.string_menu_main_settings;
+                        but2 = new UIButton(room,
+                                            room.getGameInstance().getWidth() / 2f,
+                                            390,
+                                            text,
+                                            UILayout.CENTERED,
+                                            Resources.font_menu_main_buttons,
+                                            Resources.color_menu_main_buttons_unhighlighted,
+                                            Resources.color_menu_main_buttons_highlighted);
+                        break;
+                    case 2:
+                        text = Resources.string_menu_main_quit;
+                        but3 = new UIButton(room,
+                                            room.getGameInstance().getWidth() / 2f,
+                                            510,
+                                            text,
+                                            UILayout.CENTERED,
+                                            Resources.font_menu_main_buttons,
+                                            Resources.color_menu_main_buttons_unhighlighted,
+                                            Resources.color_menu_main_buttons_highlighted);
+                        break;
+                }
             }
+            catch (Exception ignored) {}
         }
-        
     }
     
     /**
@@ -78,20 +88,23 @@ public class MainMenu extends GameObject {
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         
-        if (but1.isButtonClicked(e)) {
+        System.out.println("Mouse Clicked " + but1.isMouseHover());
+        if (but1.isMouseHover()) {
             
             //Not the final implementation
             Room destination = new RoomBuilder(room.getGameInstance()).initFromFile(RoomType.GAME).build();
             room.getGameInstance().getDrawer().changeRoomSafely(destination);
         }
-        if (but2.isButtonClicked(e)) {
+        if (but2.isMouseHover()) {
             
-            but1.setFlow(UIButton.LAYOUT.RIGHT);
-            but2.setFlow(UIButton.LAYOUT.RIGHT);
-            but3.setFlow(UIButton.LAYOUT.RIGHT);
+            System.out.println(but1.getOriginLayout().name());
+            
+            but1.setOriginLayout(UILayout.RIGHT);
+            but2.setOriginLayout(UILayout.RIGHT);
+            but3.setOriginLayout(UILayout.RIGHT);
         }
-        if (but3.isButtonClicked(e)) {
-    
+        if (but3.isMouseHover()) {
+            
             Runtime.getRuntime().exit(0);
             
         }
