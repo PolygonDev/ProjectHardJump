@@ -31,7 +31,8 @@ public class Resources {
     public static final AnimatedSprite as_player = new AnimatedSprite(80, 80, 0,
              "res//game//sprites//player//idle.png",
                     "res//game//sprites//player//walk1.png",
-                    "res//game//sprites//player//walk2.png");
+                    "res//game//sprites//player//walk2.png",
+                    "res//game//sprites//player//jump.png");
 
     public static final Sprite sprite_jetpack = new Sprite("res//game//sprites//collectables//jetpack.png", 64, 64, 0);
 

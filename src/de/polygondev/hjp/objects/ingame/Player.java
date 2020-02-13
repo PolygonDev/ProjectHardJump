@@ -89,6 +89,11 @@ public class Player extends GameObject {
             mover.setXspeed(5f);
 
         }
+
+        if (mover.getYspeed() < 0) {
+            pac.setAnimationType(PlayerAnimationController.AnimationType.JUMP);
+        }
+
         checkForCollectibles();
         pac.update();
         updatePhysics();

@@ -30,7 +30,6 @@ public class Collectable extends GameObject {
         return this.type;
     }
 
-
     public enum CollectableType {
         COIN, POWERUP_JATPACK;
     }

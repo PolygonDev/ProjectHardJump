@@ -37,8 +37,12 @@ public class PlayerAnimationController extends AnimationController {
             delayState = 0;
         }
 
-        if (type == AnimationType.IDLE || type == AnimationType.JUMP) {
+        if (type == AnimationType.IDLE) {
             sprite.setCurrentFrame(0);
+        }
+
+        if (type == AnimationType.JUMP) {
+            sprite.setCurrentFrame(3);
         }
 
         else if (type == AnimationType.WALK) {
