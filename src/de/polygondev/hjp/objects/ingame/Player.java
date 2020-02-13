@@ -89,7 +89,7 @@ public class Player extends GameObject {
             mover.setXspeed(7f);
 
         }
-
+        checkForCollectibles();
         pac.update();
         updatePhysics();
     }
@@ -102,12 +102,13 @@ public class Player extends GameObject {
     }
 
     private void checkForCollectibles() {
-        for (GameObject obj : room.getObjectManager().getObjects()) {
+        if (collider.checkUnsolidBoxCollision((int) x, (int) y, w, h)) {
+            GameObject obj = collider.getLastCollision();
             if (obj instanceof Collectable) {
                 Collectable col = (Collectable) obj;
                 if (col.getType() == Collectable.CollectableType.POWERUP_JATPACK) {
-                    enableJetPack();
                     col.destroy();
+                    enableJetPack();
                 }
             }
         }

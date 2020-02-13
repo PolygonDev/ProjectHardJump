@@ -14,12 +14,16 @@ public class Collectable extends GameObject {
 
     public Collectable(Room room, int x, int y, CollectableType type, Sprite sprite) {
         super(room);
+
         this.type = type;
-
         this.sprite = sprite;
-
         this.x = x;
         this.y = y;
+        this.w = sprite.getWidth();
+        this.h = sprite.getHeight();
+
+        this.solid = false;
+
     }
 
     public CollectableType getType() {

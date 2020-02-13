@@ -23,6 +23,7 @@ public class Resources {
     public static final Color color_menu_main_buttons_highlighted = Color.decode(fcColors.getFromKeyword("menu_main_buttons_highlighted"));
     public static final Color color_menu_main_background = Color.decode(fcColors.getFromKeyword("menu_main_background"));
     public static final Color color_menu_main_title = Color.decode(fcColors.getFromKeyword("menu_main_title"));
+    public static final Color color_game_background = Color.decode(fcColors.getFromKeyword("game_background"));
 
     public static final Font font_menu_main_buttons = new Font(fcStyles.getFromKeyword("font_menu_main_buttons_name"), Font.PLAIN, Integer.parseInt(fcStyles.getFromKeyword("font_menu_main_buttons_size")));
     public static final Font font_menu_main_title = new Font(fcStyles.getFromKeyword("font_menu_main_title_name"), Font.PLAIN, Integer.parseInt(fcStyles.getFromKeyword("font_menu_main_title_size")));

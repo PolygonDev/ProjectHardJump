@@ -8,6 +8,7 @@ import de.polygondev.hjp.enums.RoomType;
 import de.polygondev.hjp.objects.ingame.Collectable;
 import de.polygondev.hjp.objects.ingame.Ground;
 import de.polygondev.hjp.objects.ingame.Player;
+import de.polygondev.hjp.objects.ui.GameUI;
 import de.polygondev.hjp.objects.ui.MainMenu;
 import de.polygondev.hjp.objects.ui.UIButton;
 import de.polygondev.hjp.objects.ui.UILabel;
@@ -32,7 +33,7 @@ public class RoomBuilder {
             return this;
         }
         
-        
+        new GameUI(room);
         
         try {
             GameFile gf = new GameFile("res//game//rooms//" + roomType.name().toLowerCase() + ".data");
