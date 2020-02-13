@@ -9,6 +9,7 @@ import de.cg.cgge.physics.Gravity;
 import de.cg.cgge.physics.Mover;
 import de.polygondev.hjp.animations.PlayerAnimationController;
 import de.polygondev.hjp.ctrl.GameCamera;
+import de.polygondev.hjp.utils.PlayerStatistics;
 
 
 import java.awt.*;
@@ -25,6 +26,8 @@ public class Player extends GameObject {
     private KeyManager keyManager = this.getRoom().getKeyManager();
 
     private PlayerAnimationController pac;
+
+    private PlayerStatistics stats;
     
     public Player(Room room, int x, int y) {
         
@@ -40,13 +43,17 @@ public class Player extends GameObject {
 
         gravity.setAcceleration(1.01f);
 
-        pac = new PlayerAnimationController();
-
         addPhysics(mover);
         addPhysics(gravity);
+
+        solid = false;
+
+        pac = new PlayerAnimationController();
+        stats = new PlayerStatistics();
     }
 
     private int movementAccelerator = 0;
+    private boolean jetPackAble = false;
 
     @Override
     public void step() {
@@ -56,21 +63,43 @@ public class Player extends GameObject {
         //Jumping
         if (keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W)) {
             if (mover.isOnGround() && !isJumping) {
-                mover.setYspeed(-20f);
+                mover.setYspeed(-15f);
                 isJumping = true;
                 room.getCamera().setYpadding(0);
-            } else if (mover.getYspeed() < 0){
+            }
+            else if (mover.getYspeed() < 0){
+                //When the button is pressed longer, this velocity should be added
                 mover.setYspeed(mover.getYspeed()-0.5f);
             }
-        } else if (!keyManager.checkKey(KeyEvent.VK_SPACE) && !keyManager.checkKey(KeyEvent.VK_W)) {
-            if (isJumping && mover.getYspeed() < 0) {
-                mover.setYspeed(5);
+
+            //Making use of the jetpack
+            if (jetPackAble && stats.hasJetpack()) {
+
+                gravity.reset();
+                mover.setYspeed(mover.getYspeed()-20f);
+                stats.setJetpackFuel(stats.getJetpackFuel()-10f);
+                jetPackAble = false;
+
+                //Deactivating the jetpack if fuel drops
+                if (stats.getJetpackFuel() < 1) {
+                    stats.setHasJetpack(false);
+                }
+            }
+
+
+        }
+        //Jetpack control
+        else if (!keyManager.checkKey(KeyEvent.VK_SPACE) && !keyManager.checkKey(KeyEvent.VK_W)) {
+
+            if (isJumping) {
+                jetPackAble = true;
             }
         }
-    
-        if (this.collider.checkSolidBoxCollision(this.getX(), this.getY() + 1.0F, this.getWidth(), this.getHeight()) || this.mover.getYspeed() > 0.0F) {
+
+        //Resetting jumping
+        if (this.collider.checkSolidBoxCollision(this.getX(), this.getY() + 1.0F, this.getWidth(), this.getHeight()) && this.mover.getYspeed() > 0.0F) {
             isJumping = false;
-            room.getCamera().setYpadding(200);
+            jetPackAble = false;
         }
         
         //Going left
@@ -90,6 +119,7 @@ public class Player extends GameObject {
 
         }
 
+        //Jump animations
         if (mover.getYspeed() < 0) {
             pac.setAnimationType(PlayerAnimationController.AnimationType.JUMP);
         }
@@ -106,6 +136,15 @@ public class Player extends GameObject {
         pac.draw((int)x,(int)y,cr, g);
     }
 
+    @Override
+    public void postDraw(Graphics g) {
+        //Jetpack bar
+        if (stats.hasJetpack()) {
+            g.fillRect(20, 20, 100, 20);
+            g.fillRect(20, 20, (int) stats.getJetpackFuel(), 20);
+        }
+    }
+
     private void checkForCollectibles() {
         if (collider.checkUnsolidBoxCollision((int) x, (int) y, w, h)) {
             GameObject obj = collider.getLastCollision();
@@ -120,7 +159,8 @@ public class Player extends GameObject {
     }
 
     private void enableJetPack() {
-
+        stats.setHasJetpack(true);
+        stats.setJetpackFuel(100f);
     }
 
 }
