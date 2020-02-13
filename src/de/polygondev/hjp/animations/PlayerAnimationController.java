@@ -13,14 +13,14 @@ public class PlayerAnimationController extends AnimationController {
 
     private int walkState = 0;
     private int delayState = 0;
-    private final int delay = 5;
+    private final int delay = 30;
     private int dir = 0;
     private int currentFrame = 0;
 
     public PlayerAnimationController() {
         sprite = new AnimatedSprite(Resources.as_player);
-        sprite.setCenterX(16);
-        sprite.setCenterY(16);
+        sprite.setCenterX(sprite.getWidth()/2);
+        sprite.setCenterY(sprite.getHeight()/2);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PlayerAnimationController extends AnimationController {
             sprite.setCurrentFrame(walkState);
         }
 
-        sprite.setWidth(64-dir*128);
+        sprite.setWidth(80-dir*80*2);
     }
 
     public void setAnimationType(AnimationType type) {

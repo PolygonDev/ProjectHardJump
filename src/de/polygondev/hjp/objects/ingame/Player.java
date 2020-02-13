@@ -32,8 +32,8 @@ public class Player extends GameObject {
     
         this.x = x;
         this.y = y;
-        this.w = 64;
-        this.h = 64;
+        this.w = 80;
+        this.h = 80;
 
         GameCamera gameCamera = new GameCamera(this, room, 7);
         room.setCamera(gameCamera);
@@ -78,7 +78,7 @@ public class Player extends GameObject {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(1);
 
-            mover.setXspeed(-7f);
+            mover.setXspeed(-5f);
 
         }
         //Going right
@@ -86,7 +86,7 @@ public class Player extends GameObject {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(0);
 
-            mover.setXspeed(7f);
+            mover.setXspeed(5f);
 
         }
         checkForCollectibles();
