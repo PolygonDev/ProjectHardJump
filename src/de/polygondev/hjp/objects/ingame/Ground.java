@@ -3,11 +3,15 @@ package de.polygondev.hjp.objects.ingame;
 import de.cg.cgge.game.CameraRenderer;
 import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
+import de.cg.cgge.gui.Sprite;
+import de.polygondev.hjp.ctrl.Resources;
 
 import java.awt.*;
 
 public class Ground extends GameObject {
-    
+
+    private Sprite sprite;
+
     public Ground(Room room, int x, int y, int w, int h) {
 
         super(room);
@@ -16,6 +20,10 @@ public class Ground extends GameObject {
         this.y = y;
         this.w = w;
         this.h = h;
+
+        sprite = new Sprite(Resources.sprite_ground);
+
+        sprite.setDimensions(h, w);
     }
 
 
@@ -24,8 +32,7 @@ public class Ground extends GameObject {
 
         CameraRenderer cr = new CameraRenderer(g, room.getCamera());
         
-        g.setColor(Color.GREEN);
-        cr.fillRect((int)x,(int)y,w,h);
+        cr.drawSprite(sprite, (int)x,(int)y);
 
     }
 

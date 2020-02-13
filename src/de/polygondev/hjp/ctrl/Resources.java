@@ -35,7 +35,7 @@ public class Resources {
                     "res//game//sprites//player//jump.png");
 
     public static final Sprite sprite_jetpack = new Sprite("res//game//sprites//collectables//jetpack.png", 64, 64, 0);
-
+    public static final Sprite sprite_ground = new Sprite("res//game//sprites//ground.png", 64, 64, 0);
 
     private static FileContents getContents(String path) {
 

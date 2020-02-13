@@ -56,12 +56,12 @@ public class Player extends GameObject {
         jetpack = new Jetpack(this, stats);
     }
 
-    private int movementAccelerator = 0;
-    private boolean jetPackAble = false;
+    private float movementAccelerator = 0;
 
     @Override
     public void step() {
 
+        boolean isMoving = false;
         pac.setAnimationType(PlayerAnimationController.AnimationType.IDLE);
 
         //Jumping
@@ -90,13 +90,18 @@ public class Player extends GameObject {
             isJumping = false;
             jetpack.onGround();
         }
-        
+
+        /*
+                    BASIC MOVEMENT
+         */
+
         //Going left
         if (keyManager.checkKey(KeyEvent.VK_A)) {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(1);
 
-            mover.setXspeed(-5f);
+            mover.setXspeed(-5f-movementAccelerator);
+            isMoving = true;
 
         }
         //Going right
@@ -104,8 +109,15 @@ public class Player extends GameObject {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(0);
 
-            mover.setXspeed(5f);
+            mover.setXspeed(5f+movementAccelerator);
+            isMoving = true;
 
+        }
+
+        if (isMoving) {
+            if (movementAccelerator < 3f) movementAccelerator+=0.1f;
+        } else {
+            movementAccelerator = 0;
         }
 
         //Jump animations
