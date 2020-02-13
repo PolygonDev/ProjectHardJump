@@ -7,12 +7,12 @@ import de.cg.cgge.gui.Sprite;
 
 import java.awt.*;
 
-public class Collectable extends GameObject {
+public class Collectible extends GameObject {
 
-    private CollectableType type;
+    private CollectibleType type;
     private Sprite sprite;
 
-    public Collectable(Room room, int x, int y, CollectableType type, Sprite sprite) {
+    public Collectible(Room room, int x, int y, CollectibleType type, Sprite sprite) {
         super(room);
 
         this.type = type;
@@ -26,11 +26,11 @@ public class Collectable extends GameObject {
 
     }
 
-    public CollectableType getType() {
+    public CollectibleType getType() {
         return this.type;
     }
 
-    public enum CollectableType {
+    public enum CollectibleType {
         COIN, POWERUP_JATPACK;
     }
 

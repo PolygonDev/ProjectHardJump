@@ -139,9 +139,9 @@ public class Player extends GameObject {
     private void checkForCollectibles() {
         if (collider.checkUnsolidBoxCollision((int) x, (int) y, w, h)) {
             GameObject obj = collider.getLastCollision();
-            if (obj instanceof Collectable) {
-                Collectable col = (Collectable) obj;
-                if (col.getType() == Collectable.CollectableType.POWERUP_JATPACK) {
+            if (obj instanceof Collectible) {
+                Collectible col = (Collectible) obj;
+                if (col.getType() == Collectible.CollectibleType.POWERUP_JATPACK) {
                     col.destroy();
                     enableJetPack();
                 }

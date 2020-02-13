@@ -5,7 +5,7 @@ import de.cg.cgge.files.GameFile;
 import de.cg.cgge.game.GameInstance;
 import de.cg.cgge.game.Room;
 import de.polygondev.hjp.enums.RoomType;
-import de.polygondev.hjp.objects.ingame.Collectable;
+import de.polygondev.hjp.objects.ingame.Collectible;
 import de.polygondev.hjp.objects.ingame.Ground;
 import de.polygondev.hjp.objects.ingame.Player;
 import de.polygondev.hjp.objects.ui.*;
@@ -63,7 +63,7 @@ public class RoomBuilder {
                     int x = Integer.parseInt(sections[1]);
                     int y = Integer.parseInt(sections[2]);
 
-                    new Collectable(room, x, y, Collectable.CollectableType.POWERUP_JATPACK, Resources.sprite_jetpack);
+                    new Collectible(room, x, y, Collectible.CollectibleType.POWERUP_JATPACK, Resources.sprite_jetpack);
                 }
 
             }
