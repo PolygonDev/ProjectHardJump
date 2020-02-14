@@ -73,7 +73,7 @@ public class Player extends GameObject {
             }
             else if (mover.getYspeed() < 0){
                 //When the button is pressed longer, this velocity should be added
-                mover.setYspeed(mover.getYspeed()-0.5f);
+                mover.setYspeed(mover.getYspeed()-0.7f);
             }
 
             jetpack.onInAirPress();

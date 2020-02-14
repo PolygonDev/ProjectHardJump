@@ -8,32 +8,22 @@ import de.polygondev.hjp.ctrl.Resources;
 
 import java.awt.*;
 
-public class Ground extends GameObject {
-
-    private Sprite sprite;
+public class Ground extends Platform {
 
     public Ground(Room room, int x, int y, int w, int h) {
 
-        super(room);
+        super(room, x, y, w, h, Resources.sprite_ground);
 
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-
-        sprite = new Sprite(Resources.sprite_ground);
-
-        sprite.setDimensions(h, w);
     }
 
 
     @Override
     public void draw(Graphics g) {
-
-        CameraRenderer cr = new CameraRenderer(g, room.getCamera());
-        
-        cr.drawSprite(sprite, (int)x,(int)y);
-
+        super.draw(g);
     }
 
 }

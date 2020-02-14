@@ -13,7 +13,7 @@ public class PlayerAnimationController extends AnimationController {
 
     private int walkState = 0;
     private int delayState = 0;
-    private final int delay = 30;
+    private final int delay = 10;
     private int dir = 0;
     private int currentFrame = 0;
 
