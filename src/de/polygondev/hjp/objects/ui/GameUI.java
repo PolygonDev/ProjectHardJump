@@ -2,6 +2,7 @@ package de.polygondev.hjp.objects.ui;
 
 import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
+import de.cg.cgge.physics.Physics;
 import de.polygondev.hjp.ctrl.Resources;
 
 import java.awt.*;
@@ -29,4 +30,9 @@ public class GameUI extends GameObject {
         g2d.fillRect(0,0,room.getGameInstance().getWidth(),room.getGameInstance().getHeight());
     }
 
+    @Override
+    public void postDraw(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.drawString("FPS: " + room.getGameInstance().getFramerate()/Physics.deltaTime(room.getGameInstance()), 0, 300);
+    }
 }
