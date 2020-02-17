@@ -32,7 +32,8 @@ public class Resources {
              "res//game//sprites//player//new//idle.png",
                     "res//game//sprites//player//new//walk1.png",
                     "res//game//sprites//player//new//walk1.png",
-                    "res//game//sprites//player//new//jump.png");
+                    "res//game//sprites//player//new//jump.png",
+                    "res//game//sprites//player//new//recharge.png");
 
     public static final AnimatedSprite as_upforce = new AnimatedSprite(64,64,0,
             "res//game//sprites//upforce//uf1.png",

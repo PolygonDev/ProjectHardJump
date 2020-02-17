@@ -41,8 +41,12 @@ public class PlayerAnimationController extends AnimationController {
             sprite.setCurrentFrame(0);
         }
 
-        if (type == AnimationType.JUMP) {
+        else if (type == AnimationType.JUMP) {
             sprite.setCurrentFrame(3);
+        }
+
+        else if (type == AnimationType.RECHARGE) {
+            sprite.setCurrentFrame(4);
         }
 
         else if (type == AnimationType.WALK) {
@@ -63,7 +67,7 @@ public class PlayerAnimationController extends AnimationController {
 
 
     public enum AnimationType {
-       WALK, JUMP, IDLE;
+       WALK, JUMP, IDLE, RECHARGE;
     }
 
     public void setDir(int dir) {

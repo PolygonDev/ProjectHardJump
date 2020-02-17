@@ -21,6 +21,7 @@ import java.awt.event.KeyEvent;
 public class Player extends GameObject {
 
     private boolean isJumping = false;
+    private boolean recharging = false;
 
     public Mover mover = new Mover(this);
     public Collider collider = new Collider(this.room, this);
@@ -70,7 +71,7 @@ public class Player extends GameObject {
         pac.setAnimationType(PlayerAnimationController.AnimationType.IDLE);
 
         //Jumping
-        if (keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W)) {
+        if (keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W) && !recharging) {
             if (mover.isOnGround() && !isJumping) {
                 mover.setYspeed(-15f);
                 isJumping = true;
@@ -101,7 +102,7 @@ public class Player extends GameObject {
          */
 
         //Going left
-        if (keyManager.checkKey(KeyEvent.VK_A)) {
+        if (keyManager.checkKey(KeyEvent.VK_A) && !recharging) {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(1);
 
@@ -110,7 +111,7 @@ public class Player extends GameObject {
 
         }
         //Going right
-        if (keyManager.checkKey(KeyEvent.VK_D)) {
+        if (keyManager.checkKey(KeyEvent.VK_D) && !recharging) {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(0);
 
@@ -133,6 +134,38 @@ public class Player extends GameObject {
         //Rest button
         if (keyManager.checkKey(KeyEvent.VK_R)) {
             playerEvents.onDeath();
+        }
+
+
+        /*
+            MANA RECHARGING
+            You shouldnt be able to do anything while recharging.
+            It should take long so that there's a risk
+         */
+
+        //When mana button is pressed, it toggles recharging to true
+        if (keyManager.checkKey(KeyEvent.VK_Q) && !recharging) {
+
+            mover.setXspeed(0f);
+            stats.setMana(0f);
+            recharging = true;
+
+        //When mana button is released, it toggles recharging to false
+        } else if (!keyManager.checkKey(KeyEvent.VK_Q) && recharging) {
+
+            //Reset charge, if not fully loaded
+            if (stats.getMana()<100) {
+                stats.setMana(0f);
+            }
+            recharging = false;
+        }
+
+        //When the player is recharging
+        if (recharging) {
+            if (stats.getMana() < 100) {
+                stats.setMana(stats.getMana()+0.25f);
+                pac.setAnimationType(PlayerAnimationController.AnimationType.RECHARGE);
+            }
         }
 
         checkForCollisions();
