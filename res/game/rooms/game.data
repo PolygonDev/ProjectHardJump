@@ -1,5 +1,5 @@
 player;50;50
 ground;0;500;420;60
 ground;600;450;4020;60
-jetpack;700;380
-spikes;650;386;150;64
+jetpack;700;300
+spikes;680;386;150;64

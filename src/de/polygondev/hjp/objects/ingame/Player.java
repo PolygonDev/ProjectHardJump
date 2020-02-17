@@ -145,27 +145,34 @@ public class Player extends GameObject {
 
     @Override
     public void postDraw(Graphics g) {
-        //Jetpack bar
-        if (stats.hasJetpack()) {
-            g.setColor(Color.BLACK);
-            g.fillRect(20, 20, 100, 20);
-            g.setColor(Color.MAGENTA);
-            g.fillRect(20, 20, (int) stats.getMana(), 20);
-        }
+        //Mana bar
+        g.setColor(Color.BLACK);
+        g.fillRect(20, 20, 100, 20);
+        g.setColor(Color.MAGENTA);g.fillRect(20, 20, (int) stats.getMana(), 20);
+
     }
 
     private void checkForCollisions() {
+
+        //Check if the object is colliding with anything
         if (collider.checkUnsolidBoxCollision((int) x, (int) y, w, h)) {
+
             GameObject obj = collider.getLastCollision();
+
+            //Check for collectibles
             if (obj instanceof Collectible) {
+
                 Collectible col = (Collectible) obj;
                 if (col.getType() == Collectible.CollectibleType.POWERUP_JATPACK) {
+
                     col.destroy();
                     enableJetPack();
                 }
             }
 
+            //Check for spikes
             if (obj instanceof Spikes) {
+
                 playerEvents.onDeath();
             }
         }

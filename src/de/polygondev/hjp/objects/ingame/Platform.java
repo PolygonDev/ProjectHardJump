@@ -20,13 +20,13 @@ public class Platform extends GameObject {
         this.y = y;
         this.w = w;
         this.h = h ;
-
+        
         this.sprite = new Sprite(sprite);
         this.img = generateImage();
     }
 
     private Image generateImage() {
-        BufferedImage img = new BufferedImage(w, h, 1);
+        BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics g = img.getGraphics();
 
         int columns = w/sprite.getWidth();
