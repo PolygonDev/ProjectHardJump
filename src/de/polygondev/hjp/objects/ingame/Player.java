@@ -8,6 +8,7 @@ import de.cg.cgge.physics.Collider;
 import de.cg.cgge.physics.Gravity;
 import de.cg.cgge.physics.Mover;
 import de.polygondev.hjp.animations.PlayerAnimationController;
+import de.polygondev.hjp.animations.UpforceAnimationController;
 import de.polygondev.hjp.collectibles.Jetpack;
 import de.polygondev.hjp.ctrl.GameCamera;
 import de.polygondev.hjp.events.PlayerEvents;
@@ -28,6 +29,8 @@ public class Player extends GameObject {
     private KeyManager keyManager = this.getRoom().getKeyManager();
 
     private PlayerAnimationController pac;
+    public UpforceAnimationController ufac;
+
     private PlayerStatistics stats;
     private Jetpack jetpack;
     private PlayerEvents playerEvents = new PlayerEvents(this);
@@ -52,6 +55,8 @@ public class Player extends GameObject {
         solid = false;
 
         pac = new PlayerAnimationController();
+        ufac = new UpforceAnimationController(this);
+
         stats = new PlayerStatistics();
         jetpack = new Jetpack(this, stats);
     }
@@ -131,7 +136,10 @@ public class Player extends GameObject {
         }
 
         checkForCollisions();
+
+        //Update animations
         pac.update();
+        ufac.update();
 
         updatePhysics();
     }
@@ -141,6 +149,11 @@ public class Player extends GameObject {
         var cr = new CameraRenderer(g,room.getCamera());
 
         pac.draw((int)x,(int)y,cr, g);
+
+        //Jetpack animations
+        if (ufac.isVisible()) {
+            ufac.draw((int)x,(int)y,cr,g);
+        }
     }
 
     @Override

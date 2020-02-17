@@ -34,6 +34,12 @@ public class Resources {
                     "res//game//sprites//player//new//walk1.png",
                     "res//game//sprites//player//new//jump.png");
 
+    public static final AnimatedSprite as_upforce = new AnimatedSprite(64,64,0,
+            "res//game//sprites//upforce//uf1.png",
+                "res//game//sprites//upforce//uf2.png",
+                "res//game//sprites//upforce//uf3.png");
+
+
     public static final Sprite sprite_jetpack = new Sprite("res//game//sprites//collectables//jetpack.png", 64, 64, 0);
     public static final Sprite sprite_ground = new Sprite("res//game//sprites//ground.png", 64, 64, 0);
     public static final Sprite sprite_spikes = new Sprite("res//game//sprites//spikes.png", 64, 64, 0);

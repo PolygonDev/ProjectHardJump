@@ -27,6 +27,7 @@ public class Jetpack {
 
     public void onGround(){
         jetPackAble = false;
+        player.ufac.setVisible(false);
     }
 
     private void useJetpack() {
@@ -36,6 +37,7 @@ public class Jetpack {
             player.mover.setYspeed(-0.01f);
             stats.setMana(stats.getMana() - 0.3f);
             jetPackAble = true;
+            player.ufac.setVisible(true);
         }
     }
 
