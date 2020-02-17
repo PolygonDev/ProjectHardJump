@@ -8,6 +8,7 @@ import de.polygondev.hjp.enums.RoomType;
 import de.polygondev.hjp.objects.ingame.Collectible;
 import de.polygondev.hjp.objects.ingame.Ground;
 import de.polygondev.hjp.objects.ingame.Player;
+import de.polygondev.hjp.objects.ingame.Spikes;
 import de.polygondev.hjp.objects.ui.*;
 
 import java.io.IOException;
@@ -64,6 +65,15 @@ public class RoomBuilder {
                     int y = Integer.parseInt(sections[2]);
 
                     new Collectible(room, x, y, Collectible.CollectibleType.POWERUP_JATPACK, Resources.sprite_jetpack);
+                }
+                else if (sections[0].equalsIgnoreCase("spikes")) {
+
+                    int x = Integer.parseInt(sections[1]);
+                    int y = Integer.parseInt(sections[2]);
+                    int w = Integer.parseInt(sections[3]);
+                    int h = Integer.parseInt(sections[4]);
+
+                    new Spikes(room, x, y, w, h);
                 }
 
             }

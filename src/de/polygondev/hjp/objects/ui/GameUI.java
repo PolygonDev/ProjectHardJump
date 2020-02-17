@@ -33,6 +33,7 @@ public class GameUI extends GameObject {
     @Override
     public void postDraw(Graphics g) {
         g.setColor(Color.WHITE);
-        g.drawString("FPS: " + room.getGameInstance().getFramerate()/Physics.deltaTime(room.getGameInstance()), 0, 300);
+        g.drawString("FPS Currently: " + room.getGameInstance().getFramerate()/Physics.deltaTime(room.getGameInstance()), 0, 300);
+        g.drawString("FPS AVG: " + room.getGameInstance().getDrawer().getCurrentFramerate(), 0, 350);
     }
 }

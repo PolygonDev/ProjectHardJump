@@ -10,6 +10,7 @@ import de.cg.cgge.physics.Mover;
 import de.polygondev.hjp.animations.PlayerAnimationController;
 import de.polygondev.hjp.collectibles.Jetpack;
 import de.polygondev.hjp.ctrl.GameCamera;
+import de.polygondev.hjp.events.PlayerEvents;
 import de.polygondev.hjp.utils.PlayerStatistics;
 
 
@@ -27,10 +28,9 @@ public class Player extends GameObject {
     private KeyManager keyManager = this.getRoom().getKeyManager();
 
     private PlayerAnimationController pac;
-
     private PlayerStatistics stats;
-
     private Jetpack jetpack;
+    private PlayerEvents playerEvents = new PlayerEvents(this);
     
     public Player(Room room, int x, int y) {
         
@@ -100,7 +100,7 @@ public class Player extends GameObject {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(1);
 
-            mover.setXspeed(-5f-movementAccelerator);
+            mover.setXspeed(-3f-movementAccelerator);
             isMoving = true;
 
         }
@@ -109,13 +109,13 @@ public class Player extends GameObject {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
             pac.setDir(0);
 
-            mover.setXspeed(5f+movementAccelerator);
+            mover.setXspeed(3f+movementAccelerator);
             isMoving = true;
 
         }
 
         if (isMoving) {
-            if (movementAccelerator < 3f) movementAccelerator+=0.1f;
+            if (movementAccelerator < 5f) movementAccelerator+=0.2f;
         } else {
             movementAccelerator = 0;
         }
@@ -125,8 +125,14 @@ public class Player extends GameObject {
             pac.setAnimationType(PlayerAnimationController.AnimationType.JUMP);
         }
 
-        checkForCollectibles();
+        //Rest button
+        if (keyManager.checkKey(KeyEvent.VK_R)) {
+            playerEvents.onDeath();
+        }
+
+        checkForCollisions();
         pac.update();
+
         updatePhysics();
     }
     
@@ -143,12 +149,12 @@ public class Player extends GameObject {
         if (stats.hasJetpack()) {
             g.setColor(Color.BLACK);
             g.fillRect(20, 20, 100, 20);
-            g.setColor(Color.BLUE);
-            g.fillRect(20, 20, (int) stats.getJetpackFuel(), 20);
+            g.setColor(Color.MAGENTA);
+            g.fillRect(20, 20, (int) stats.getMana(), 20);
         }
     }
 
-    private void checkForCollectibles() {
+    private void checkForCollisions() {
         if (collider.checkUnsolidBoxCollision((int) x, (int) y, w, h)) {
             GameObject obj = collider.getLastCollision();
             if (obj instanceof Collectible) {
@@ -158,13 +164,16 @@ public class Player extends GameObject {
                     enableJetPack();
                 }
             }
+
+            if (obj instanceof Spikes) {
+                playerEvents.onDeath();
+            }
         }
     }
 
     private void enableJetPack() {
         jetpack.onEnable();
     }
-
 
 
 }

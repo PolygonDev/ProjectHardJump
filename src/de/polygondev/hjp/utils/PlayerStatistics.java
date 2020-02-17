@@ -7,7 +7,8 @@ public class PlayerStatistics {
     private float lifePoints = 0f;
     private float dmgPoints = 0f;
     private boolean hasJetpack = false;
-    private float jetpackFuel = 100f;
+    private float mana = 100f;
+    private float maxMana = 100f;
 
     /**
      * Gets the Lifepoints of the Player
@@ -61,11 +62,19 @@ public class PlayerStatistics {
         this.hasJetpack = val;
     }
 
-    public float getJetpackFuel() {
-        return this.jetpackFuel;
+    public float getMana() {
+        return mana;
     }
 
-    public void setJetpackFuel(float jetpackFuel) {
-        this.jetpackFuel = jetpackFuel;
+    public void setMana(float mana) {
+        this.mana = mana;
+    }
+
+    public float getMaxMana() {
+        return maxMana;
+    }
+
+    public void setMaxMana(float maxMana) {
+        this.maxMana = maxMana;
     }
 }

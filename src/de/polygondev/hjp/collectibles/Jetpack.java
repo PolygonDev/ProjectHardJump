@@ -31,20 +31,17 @@ public class Jetpack {
 
     private void useJetpack() {
 
-        player.gravity.reset();
-        player.mover.setYspeed(-0.01f);
-        stats.setJetpackFuel(stats.getJetpackFuel()-0.3f);
-        jetPackAble = true;
-
-        //Deactivating the jetpack if fuel drops
-        if (stats.getJetpackFuel() < 1) {
-            stats.setHasJetpack(false);
+        if (stats.getMana() >= 1) {
+            player.gravity.reset();
+            player.mover.setYspeed(-0.01f);
+            stats.setMana(stats.getMana() - 0.3f);
+            jetPackAble = true;
         }
     }
 
     public void onEnable() {
         stats.setHasJetpack(true);
-        stats.setJetpackFuel(100f);
+        stats.setMana(100f);
     }
 
 }
