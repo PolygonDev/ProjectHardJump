@@ -1,9 +1,9 @@
 package de.polygondev.hjp.objects.ui;
 
 import de.cg.cgge.game.Room;
+import de.polygondev.hjp.enums.UILayout;
 
 import java.awt.*;
-import java.lang.reflect.Method;
 
 public class UILabel extends UIObject {
     

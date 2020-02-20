@@ -3,6 +3,7 @@ package de.polygondev.hjp.objects.ui;
 import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
 import de.cg.cgge.io.MouseHelper;
+import de.polygondev.hjp.enums.UILayout;
 
 import java.awt.*;
 

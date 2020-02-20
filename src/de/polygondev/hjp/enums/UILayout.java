@@ -1,4 +1,4 @@
-package de.polygondev.hjp.objects.ui;
+package de.polygondev.hjp.enums;
 
 public enum UILayout {
     
