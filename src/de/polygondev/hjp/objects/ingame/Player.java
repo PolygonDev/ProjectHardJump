@@ -149,6 +149,7 @@ public class Player extends GameObject {
 
         //Rest button
         if (keyManager.checkKey(KeyEvent.VK_R)) {
+            gravity.reset();
             playerEvents.onDeath();
         }
 
@@ -213,7 +214,7 @@ public class Player extends GameObject {
         g.setColor(Color.MAGENTA);g.fillRect(20, 20, (int) stats.getMana()*2, 10);
         
         g.setColor(Color.WHITE);
-        g.drawString("Player Mana: " + stats.getMana(), 0, 400);
+        g.drawString("Player Mana: " + stats.getMana(), 20, 50);
     }
 
     private void checkForCollisions() {

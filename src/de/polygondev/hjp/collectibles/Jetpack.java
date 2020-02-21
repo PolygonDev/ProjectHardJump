@@ -32,10 +32,9 @@ public class Jetpack {
 
     private void useJetpack() {
 
-        if (stats.getMana() >= 1) {
+        if (stats.subMana(0.3f)) {
             player.gravity.reset();
             player.mover.setYspeed(-0.01f);
-            stats.setMana(stats.getMana() - 0.3f);
             jetPackAble = true;
             player.ufac.setVisible(true);
         }

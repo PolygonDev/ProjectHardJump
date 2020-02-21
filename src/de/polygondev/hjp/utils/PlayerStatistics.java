@@ -45,7 +45,26 @@ public class PlayerStatistics {
     public void setMana(float mana) {
         this.mana = mana;
     }
-    public void addMana(float mana) { if (this.mana <= this.maxMana - mana) { this.mana += mana; } else { this.mana = this.maxMana; } }
+    public boolean addMana(float mana) {
+        if (this.mana <= this.maxMana - mana) {
+            this.mana += mana;
+            return true;
+        }
+        else {
+            this.mana = this.maxMana;
+            return false;
+        }
+    }
+    public boolean subMana(float mana) {
+        if (this.mana - mana >= 0) {
+            this.mana -= mana;
+            return true;
+        }
+        else {
+            this.mana = 0;
+            return false;
+        }
+    }
     
     //Max mana
     public float getMaxMana() {
