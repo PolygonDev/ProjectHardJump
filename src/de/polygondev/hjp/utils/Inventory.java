@@ -24,8 +24,8 @@ public class Inventory extends GameObject {
     private int ySize = 3;
     
     @Override
-    public void draw(Graphics g) {
-        super.draw(g);
+    public void postDraw(Graphics g) {
+        super.postDraw(g);
         
         Color c = new Color(0, 0,0, 20);
         g.setColor(c);
