@@ -43,7 +43,7 @@ public class Jetpack {
 
     public void onEnable() {
         stats.setHasJetpack(true);
-        stats.setMana(100f);
+        stats.addMana(100f);
     }
 
 }

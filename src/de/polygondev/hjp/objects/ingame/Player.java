@@ -12,6 +12,7 @@ import de.polygondev.hjp.animations.UpforceAnimationController;
 import de.polygondev.hjp.collectibles.Jetpack;
 import de.polygondev.hjp.ctrl.GameCamera;
 import de.polygondev.hjp.events.PlayerEvents;
+import de.polygondev.hjp.utils.Inventory;
 import de.polygondev.hjp.utils.PlayerStatistics;
 
 
@@ -35,6 +36,8 @@ public class Player extends GameObject {
     private PlayerStatistics stats;
     private Jetpack jetpack;
     private PlayerEvents playerEvents = new PlayerEvents(this);
+    
+    Inventory i = new Inventory(this.getRoom());
     
     public Player(Room room, int x, int y) {
         
@@ -63,7 +66,12 @@ public class Player extends GameObject {
     }
 
     private float movementAccelerator = 0;
-
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+        super.keyTyped(e);
+    }
+    
     @Override
     public void step() {
 
@@ -71,7 +79,7 @@ public class Player extends GameObject {
         pac.setAnimationType(PlayerAnimationController.AnimationType.IDLE);
 
         //Jumping
-        if (keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W) && !recharging) {
+        if ((keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W)) && !recharging) {
             if (mover.isOnGround() && !isJumping) {
                 mover.setYspeed(-15f);
                 isJumping = true;
@@ -85,7 +93,7 @@ public class Player extends GameObject {
             jetpack.onInAirPress();
         }
         //Jetpack control
-        else if (!keyManager.checkKey(KeyEvent.VK_SPACE) && !keyManager.checkKey(KeyEvent.VK_W)) {
+        else if (!keyManager.checkKey(KeyEvent.VK_SPACE) && !keyManager.checkKey(KeyEvent.VK_W) && !recharging) {
             if (isJumping) {
                 jetpack.onNoKeyPressedInAir();
             }
@@ -100,7 +108,15 @@ public class Player extends GameObject {
         /*
                     BASIC MOVEMENT
          */
-
+        
+        if (keyManager.checkKey(KeyEvent.VK_I)) {
+            if (i.isVisible()) {
+                i.setVisible(false);
+            } else {
+                i.setVisible(true);
+            }
+        }
+        
         //Going left
         if (keyManager.checkKey(KeyEvent.VK_A) && !recharging) {
             pac.setAnimationType(PlayerAnimationController.AnimationType.WALK);
@@ -147,23 +163,23 @@ public class Player extends GameObject {
         if (keyManager.checkKey(KeyEvent.VK_Q) && !recharging) {
 
             mover.setXspeed(0f);
-            stats.setMana(0f);
+            stats.setMana(stats.getMana());
             recharging = true;
 
         //When mana button is released, it toggles recharging to false
         } else if (!keyManager.checkKey(KeyEvent.VK_Q) && recharging) {
 
             //Reset charge, if not fully loaded
-            if (stats.getMana()<100) {
-                stats.setMana(0f);
+            if (stats.getMana()<stats.getMaxMana()) {
+                stats.setMana(stats.getMana());
             }
             recharging = false;
         }
 
         //When the player is recharging
-        if (recharging) {
-            if (stats.getMana() < 100) {
-                stats.setMana(stats.getMana()+0.25f);
+        if (recharging && stats.getMana() < stats.getMaxMana()) {
+            if (stats.getMana() < stats.getMaxMana()) {
+                stats.addMana(0.05f);
                 pac.setAnimationType(PlayerAnimationController.AnimationType.RECHARGE);
             }
         }
@@ -193,9 +209,11 @@ public class Player extends GameObject {
     public void postDraw(Graphics g) {
         //Mana bar
         g.setColor(Color.BLACK);
-        g.fillRect(20, 20, 100, 20);
-        g.setColor(Color.MAGENTA);g.fillRect(20, 20, (int) stats.getMana(), 20);
-
+        g.fillRect(16, 16, 206, 16);
+        g.setColor(Color.MAGENTA);g.fillRect(20, 20, (int) stats.getMana()*2, 10);
+        
+        g.setColor(Color.WHITE);
+        g.drawString("Player Mana: " + stats.getMana(), 0, 400);
     }
 
     private void checkForCollisions() {
