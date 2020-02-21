@@ -77,7 +77,12 @@ public class Player extends GameObject {
 
         boolean isMoving = false;
         pac.setAnimationType(PlayerAnimationController.AnimationType.IDLE);
-
+        
+        room.getCamera().setSpeed(0);
+        room.getCamera().setObjectToFollow(null);
+        room.getCamera().setX((int) this.getX() -500);
+        room.getCamera().setY((int) this.getY() -340);
+        
         //Jumping
         if ((keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W)) && !recharging) {
             if (mover.isOnGround() && !isJumping) {
@@ -149,7 +154,6 @@ public class Player extends GameObject {
 
         //Rest button
         if (keyManager.checkKey(KeyEvent.VK_R)) {
-            gravity.reset();
             playerEvents.onDeath();
         }
 
@@ -215,6 +219,10 @@ public class Player extends GameObject {
         
         g.setColor(Color.WHITE);
         g.drawString("Player Mana: " + stats.getMana(), 20, 50);
+        g.drawString("Player PosX: " + this.getX(), 20, 400);
+        g.drawString("Player PosY: " + this.getY(), 20, 430);
+        g.drawString("Cam PosX: " + room.getCamera().getX(), 20, 460);
+        g.drawString("Cam PosY: " + room.getCamera().getY(), 20, 490);
     }
 
     private void checkForCollisions() {

@@ -11,7 +11,7 @@ public class PlayerEvents {
     }
 
     public void onSpawn() {
-
+    
     }
 
     public void onFirstSpawn() {
@@ -23,6 +23,11 @@ public class PlayerEvents {
     }
 
     public void onDeath() {
+        p.gravity.reset();
+        p.mover.setYspeed(0);
+        p.mover.setXspeed(0);
+        p.getRoom().getCamera().setX(0);
+        p.getRoom().getCamera().setY(0);
         p.setX(0);
         p.setY(0);
     }
