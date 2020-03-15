@@ -7,3 +7,5 @@ HardJumpProject.iml
 *.xml
 out
 *.class
+/MANIFEST.MF
+MANIFEST.MF

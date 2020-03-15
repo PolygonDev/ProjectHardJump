@@ -5,6 +5,7 @@ import de.cg.cgge.game.Room;
 import de.polygondev.hjp.ctrl.Resources;
 import de.polygondev.hjp.ctrl.RoomBuilder;
 import de.polygondev.hjp.enums.RoomType;
+import de.polygondev.hjp.enums.UILayout;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
