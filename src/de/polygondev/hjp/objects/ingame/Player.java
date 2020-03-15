@@ -79,10 +79,10 @@ public class Player extends GameObject {
         boolean isMoving = false;
         pac.setAnimationType(PlayerAnimationController.AnimationType.IDLE);
         
-        room.getCamera().setSpeed(0);
-        room.getCamera().setObjectToFollow(null);
-        room.getCamera().setX((int) this.getX() -500);
-        room.getCamera().setY((int) this.getY() -340);
+        //room.getCamera().setSpeed(0);
+        //room.getCamera().setObjectToFollow(null);
+        //room.getCamera().setX((int) this.getX() -500);
+        //room.getCamera().setY((int) this.getY() -340);
         
         //Jumping
         if ((keyManager.checkKey(KeyEvent.VK_SPACE) || keyManager.checkKey(KeyEvent.VK_W)) && !recharging) {
