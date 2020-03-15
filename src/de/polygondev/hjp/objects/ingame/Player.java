@@ -23,6 +23,7 @@ public class Player extends GameObject {
 
     private boolean isJumping = false;
     private boolean recharging = false;
+    private boolean inventoryCloseLock = false; 
 
     public Mover mover = new Mover(this);
     public Collider collider = new Collider(this.room, this);
@@ -37,7 +38,7 @@ public class Player extends GameObject {
     private Jetpack jetpack;
     private PlayerEvents playerEvents = new PlayerEvents(this);
     
-    Inventory i = new Inventory(this.getRoom());
+    Inventory inv = new Inventory(this.getRoom());
     
     public Player(Room room, int x, int y) {
         
@@ -113,13 +114,25 @@ public class Player extends GameObject {
         /*
                     BASIC MOVEMENT
          */
-        
+
+
+        //Open inventory
         if (keyManager.checkKey(KeyEvent.VK_I)) {
-            if (i.isVisible()) {
-                i.setVisible(false);
-            } else {
-                i.setVisible(true);
+            if (!inv.isVisible() && !inventoryCloseLock) {
+
+                inventoryCloseLock = true; //Lock the inventory, so that it wont close immediately
+                inv.setVisible(true);
+
+            } else if (!inventoryCloseLock){
+
+                inventoryCloseLock = true; //Lock the inventory, so that it wont open up immediately
+                inv.setVisible(false);
+
             }
+
+        //Disable inventory lock
+        } else if (inventoryCloseLock) {
+            inventoryCloseLock = false;
         }
         
         //Going left
