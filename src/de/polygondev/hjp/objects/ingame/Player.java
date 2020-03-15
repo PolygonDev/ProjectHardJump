@@ -42,7 +42,7 @@ public class Player extends GameObject {
     
         this.x = x;
         this.y = y;
-        this.w = 80;
+        this.w = 60;
         this.h = 80;
 
         GameCamera gameCamera = new GameCamera(this, room, 7);

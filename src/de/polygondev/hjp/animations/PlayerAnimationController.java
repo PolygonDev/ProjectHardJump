@@ -25,7 +25,7 @@ public class PlayerAnimationController extends AnimationController {
 
     @Override
     public void draw(int x, int y, CameraRenderer cr, Graphics g) {
-        sprite.draw(cr.getAdjustedX(x-dir*sprite.getWidth()), cr.getAdjustedY(y), g);
+        sprite.draw(cr.getAdjustedX(x-dir*(sprite.getWidth()+10)), cr.getAdjustedY(y), g);
     }
 
     @Override
